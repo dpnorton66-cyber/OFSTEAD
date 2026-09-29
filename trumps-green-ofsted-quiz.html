@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Inspection readiness quiz – Trumps Green Infant School</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#EDF2EE; --surface:#FFFFFF; --ink:#18241F; --muted:#56665E; --line:#B9C7BF;
+  --green:#1F4D3A; --green-soft:#DCE8E0; --gold:#E3A21A; --gold-soft:#FBEFD2;
+  --right:#23704A; --right-soft:#DDF0E4; --wrong:#A8322A; --wrong-soft:#F8E1DE;
+  --on-green:#FFFFFF;
+  box-sizing:border-box;
+  padding-top:env(safe-area-inset-top,0px);
+  padding-bottom:env(safe-area-inset-bottom,0px);
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --bg:#101915; --surface:#17231E; --ink:#E6EEE9; --muted:#9DB0A6; --line:#3A4D44;
+    --green:#7FC3A0; --green-soft:#1F3329; --gold:#F0B940; --gold-soft:#3A2F14;
+    --right:#6FCB96; --right-soft:#18342A; --wrong:#F08A80; --wrong-soft:#3B1E1B;
+    --on-green:#0E1813;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#101915; --surface:#17231E; --ink:#E6EEE9; --muted:#9DB0A6; --line:#3A4D44;
+  --green:#7FC3A0; --green-soft:#1F3329; --gold:#F0B940; --gold-soft:#3A2F14;
+  --right:#6FCB96; --right-soft:#18342A; --wrong:#F08A80; --wrong-soft:#3B1E1B;
+  --on-green:#0E1813;
+}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font-family:"Atkinson Hyperlegible",Verdana,"Segoe UI",Arial,sans-serif;font-size:1.0625rem;line-height:1.55}
+.wrap{max-width:46rem;margin:0 auto;padding:1.25rem 1.25rem 4rem}
+header.top{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;
+  border-bottom:3px solid var(--green);padding-bottom:.75rem;margin-bottom:1.5rem}
+header.top .school{font-weight:700;color:var(--green);font-size:1rem}
+header.top .tag{color:var(--muted);font-size:.9rem;display:block}
+h1{font-size:2.1rem;line-height:1.15;margin:0 0 .5rem;letter-spacing:-.01em}
+h2{font-size:1.25rem;margin:0 0 .75rem}
+p{margin:0 0 1rem}
+.lede{color:var(--muted);max-width:38rem}
+fieldset{border:0;padding:0;margin:0 0 1.9rem}
+legend{font-weight:700;font-size:1.1rem;margin-bottom:.6rem;padding:0}
+.step{display:inline-flex;align-items:center;justify-content:center;width:1.6rem;height:1.6rem;border-radius:50%;
+  background:var(--green);color:var(--on-green);font-size:.85rem;margin-right:.5rem;vertical-align:1px}
+.hint{color:var(--muted);font-size:.92rem;margin:-.3rem 0 .75rem}
+.group-label{font-size:.9rem;color:var(--muted);margin:.9rem 0 .45rem}
+.choices{display:flex;flex-wrap:wrap;gap:.5rem}
+.chip{position:relative}
+.chip input{position:absolute;opacity:0;inset:0;cursor:pointer;margin:0}
+.chip span{display:inline-block;padding:.55rem .95rem;border:2px solid var(--line);border-radius:999px;
+  background:var(--surface);cursor:pointer;font-size:.98rem}
+.chip input:checked + span{border-color:var(--green);background:var(--green);color:var(--on-green);font-weight:700}
+.chip input:focus-visible + span{outline:3px solid var(--gold);outline-offset:2px}
+.role-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(10rem,1fr));gap:.6rem}
+.role{position:relative}
+.role input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.role label{display:block;height:100%;padding:.85rem 1rem .85rem 2.6rem;border:2px solid var(--line);border-radius:10px;background:var(--surface);cursor:pointer;position:relative}
+.role label::before{content:"";position:absolute;left:.85rem;top:1rem;width:1.1rem;height:1.1rem;border:2px solid var(--line);border-radius:50%;background:var(--surface)}
+.role b{display:block;font-size:1.02rem}
+.role small{color:var(--muted);font-size:.84rem;line-height:1.35;display:block;margin-top:.15rem}
+.role input:checked + label{border-color:var(--green);background:var(--green-soft)}
+.role input:checked + label::before{border-color:var(--green);background:var(--green);box-shadow:inset 0 0 0 3px var(--surface)}
+.role input:focus-visible + label{outline:3px solid var(--gold);outline-offset:2px}
+
+/* area selection: explicit tick boxes */
+.area-list{display:grid;gap:.45rem}
+.area{position:relative}
+.area input{position:absolute;opacity:0;inset:0;margin:0;cursor:pointer}
+.area label{display:flex;align-items:center;gap:.8rem;padding:.7rem .9rem;border:2px solid var(--line);border-radius:8px;background:var(--surface);cursor:pointer}
+.area .box{flex:none;width:1.45rem;height:1.45rem;border:2px solid var(--muted);border-radius:5px;display:flex;align-items:center;justify-content:center;background:var(--surface)}
+.area .box svg{width:1rem;height:1rem;opacity:0}
+.area .name{flex:1}
+.area .state{font-size:.85rem;color:var(--muted);white-space:nowrap}
+.area input:checked + label{border-color:var(--green)}
+.area input:checked + label .box{background:var(--green);border-color:var(--green)}
+.area input:checked + label .box svg{opacity:1}
+.area input:checked + label .state{color:var(--green);font-weight:700}
+.area input:disabled + label{cursor:default}
+.area input:focus-visible + label{outline:3px solid var(--gold);outline-offset:2px}
+.linkbtn{font:inherit;font-size:.92rem;background:none;border:0;color:var(--green);text-decoration:underline;cursor:pointer;padding:.2rem 0}
+.linkbtn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+select{font:inherit;padding:.55rem .75rem;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);min-width:15rem;max-width:100%}
+select:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btn{font:inherit;font-weight:700;border:2px solid var(--green);background:var(--green);color:var(--on-green);
+  padding:.75rem 1.4rem;border-radius:8px;cursor:pointer}
+.btn:hover{filter:brightness(1.08)}
+.btn.ghost{background:transparent;color:var(--green)}
+.btn.small{padding:.45rem .9rem;font-size:.92rem}
+.btn.danger{background:var(--wrong);border-color:var(--wrong);color:#fff}
+.btn:disabled{opacity:.45;cursor:not-allowed}
+.btn:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.row{display:flex;gap:.75rem;flex-wrap:wrap;align-items:center}
+.note{background:var(--surface);border-left:4px solid var(--gold);padding:.8rem 1rem;border-radius:0 8px 8px 0;font-size:.93rem;color:var(--muted)}
+.count{color:var(--muted);font-size:.95rem}
+.hidden{display:none!important}
+
+/* bank progress on setup */
+.bank{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:1rem 1.1rem;margin:0 0 1.9rem}
+.bank .line{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;font-size:.95rem;margin-bottom:.5rem}
+.meter{height:10px;background:var(--line);border-radius:5px;overflow:hidden}
+.meter b{display:block;height:100%;background:var(--green);transition:width .3s}
+
+/* quit confirm */
+.confirm{background:var(--gold-soft);border:1px solid var(--gold);border-radius:10px;padding:.9rem 1rem;margin-bottom:1rem}
+.confirm p{margin:0 0 .6rem;font-weight:700}
+
+/* quiz progress */
+.qhead{display:flex;justify-content:space-between;gap:1rem;flex-wrap:wrap;margin-bottom:.5rem;font-size:.98rem}
+.qhead strong{font-size:1.05rem}
+.progress{display:flex;gap:4px;margin:0 0 1.1rem}
+.progress i{flex:1;height:8px;border-radius:4px;background:var(--line)}
+.progress i.ok{background:var(--right)}
+.progress i.no{background:var(--wrong)}
+.progress i.part{background:var(--gold)}
+.progress i.now{background:var(--ink);opacity:.55}
+.meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.9rem}
+.pill{font-size:.82rem;padding:.2rem .6rem;border-radius:999px;background:var(--green-soft);color:var(--green);font-weight:700}
+.pill.type{background:var(--gold-soft);color:var(--ink)}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:12px;padding:1.4rem 1.4rem 1.2rem}
+.question{font-size:1.25rem;line-height:1.4;margin:0 0 1.1rem;font-weight:700}
+.opts{display:grid;gap:.55rem}
+.opt{font:inherit;text-align:left;padding:.8rem 1rem;border:2px solid var(--line);border-radius:8px;background:var(--surface);color:var(--ink);cursor:pointer;line-height:1.4}
+.opt:hover:not(:disabled){border-color:var(--green)}
+.opt:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.opt:disabled{cursor:default}
+.opt.right{border-color:var(--right);background:var(--right-soft)}
+.opt.wrong{border-color:var(--wrong);background:var(--wrong-soft)}
+.feedback{margin-top:1.1rem;padding-top:1rem;border-top:1px solid var(--line)}
+.verdict{font-weight:700;margin-bottom:.4rem}
+.verdict.ok{color:var(--right)} .verdict.no{color:var(--wrong)}
+.source{font-size:.88rem;color:var(--muted);margin-top:.6rem}
+.local{display:inline-block;font-size:.85rem;margin-top:.6rem;padding:.3rem .6rem;border-radius:6px;background:var(--gold-soft)}
+textarea{width:100%;min-height:7rem;font:inherit;padding:.75rem;border:2px solid var(--line);border-radius:8px;background:var(--bg);color:var(--ink);resize:vertical}
+textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.keys{margin:.4rem 0 1rem;padding-left:1.2rem}
+.keys li{margin-bottom:.35rem}
+.rate{display:flex;gap:.5rem;flex-wrap:wrap}
+.rate .opt{flex:1;min-width:9rem;text-align:center}
+.next-row{margin-top:1.25rem;display:flex;justify-content:flex-end}
+
+/* results */
+.score{display:flex;align-items:baseline;gap:.75rem;margin-bottom:1.5rem}
+.score strong{font-size:3.4rem;line-height:1;color:var(--green)}
+.score span{color:var(--muted)}
+.bars{display:grid;gap:.7rem;margin-bottom:2rem}
+.bar-row{display:grid;grid-template-columns:minmax(9rem,14rem) 1fr 3.2rem;gap:.75rem;align-items:center;font-size:.95rem}
+.bar{height:12px;background:var(--line);border-radius:6px;overflow:hidden}
+.bar b{display:block;height:100%;background:var(--green)}
+.bar-row .pct{text-align:right;color:var(--muted)}
+.review{list-style:none;padding:0;margin:0 0 2rem;display:grid;gap:.75rem}
+.review li{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:.9rem 1rem}
+.review .q{font-weight:700;margin-bottom:.3rem}
+.review .src{font-size:.88rem;color:var(--muted)}
+@media (max-width:520px){
+  h1{font-size:1.7rem}
+  .bar-row{grid-template-columns:1fr 3rem}
+  .bar-row .bar{grid-column:1 / -1;order:3}
+  .area .state{display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+@media print{
+  body{background:#fff;color:#000}
+  .btn,.progress,#setup,#quiz,#quitBtn{display:none!important}
+  .review li,.card{border-color:#999}
+}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header class="top">
+    <div><span class="school">Trumps Green Infant School</span><span class="tag">Staff inspection readiness</span></div>
+    <button class="btn ghost small hidden" id="quitBtn">Quit to home</button>
+  </header>
+
+  <!-- SETUP -->
+  <section id="setup">
+    <h1>Inspection readiness quiz</h1>
+    <p class="lede">Practise for inspection in about ten minutes. Choose your role, year group, subject and the areas you want to practise. Each quiz gives you questions you have not seen before, until you have worked through the whole set.</p>
+
+    <fieldset>
+      <legend><span class="step">1</span>Your role</legend>
+      <div class="group-label">Classroom and support staff</div>
+      <div class="role-grid" id="rolesStaff"></div>
+      <div class="group-label">Leaders</div>
+      <div class="role-grid" id="rolesLead"></div>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="step">2</span>Year group</legend>
+      <div class="choices" id="years">
+        <label class="chip"><input type="radio" name="year" value="all" checked><span>All years</span></label>
+        <label class="chip"><input type="radio" name="year" value="R"><span>Reception (EYFS)</span></label>
+        <label class="chip"><input type="radio" name="year" value="1"><span>Year 1</span></label>
+        <label class="chip"><input type="radio" name="year" value="2"><span>Year 2</span></label>
+      </div>
+    </fieldset>
+
+    <fieldset id="subjectSet">
+      <legend><span class="step">3</span><label for="subject">Subject</label></legend>
+      <p class="hint">Optional. Up to three questions will be on this subject; the rest cover the areas you tick below.</p>
+      <select id="subject">
+        <option value="any">No particular subject</option>
+        <option value="reading">English: reading and phonics</option>
+        <option value="writing">English: writing</option>
+        <option value="maths">Mathematics</option>
+        <option value="science">Science</option>
+        <option value="history">History</option>
+        <option value="geography">Geography</option>
+        <option value="re">Religious education</option>
+        <option value="pshe">PSHE (Jigsaw)</option>
+        <option value="computing">Computing and online safety</option>
+        <option value="pe">Physical education</option>
+        <option value="foundation">Art, design technology or music</option>
+      </select>
+    </fieldset>
+
+    <fieldset>
+      <legend><span class="step" id="areaStep">4</span>Areas to practise</legend>
+      <p class="hint">Ticked areas are included in your quiz. Untick any you want to leave out. Safeguarding is always included.</p>
+      <div class="row" style="margin-bottom:.6rem"><button class="linkbtn" id="tickAll">Tick all</button><button class="linkbtn" id="tickNone">Untick all except safeguarding</button></div>
+      <div class="area-list" id="areas"></div>
+    </fieldset>
+
+    <div class="bank" id="bank"></div>
+
+    <div class="row">
+      <button class="btn" id="startBtn">Start quiz</button>
+      <span class="count" id="poolCount"></span>
+    </div>
+
+    <p class="note" style="margin-top:2rem">Questions draw on the school’s published documents (School Development Plan 2025–26, SEND page, safeguarding page), the Ofsted report of September 2022, and national guidance such as Keeping Children Safe in Education, the SEND Code of Practice and the EYFS framework. Answers marked “Check locally” depend on school procedures – confirm them with the senior leadership team. Your answers stay on this device.</p>
+  </section>
+
+  <!-- QUIZ -->
+  <section id="quiz" class="hidden">
+    <div class="confirm hidden" id="confirmQuit" role="alertdialog" aria-labelledby="cqText">
+      <p id="cqText">Quit this quiz and go back to the home page? This quiz will not be scored.</p>
+      <div class="row"><button class="btn danger small" id="cqYes">Quit to home</button><button class="btn ghost small" id="cqNo">Keep going</button></div>
+    </div>
+    <div class="qhead"><strong id="qCount"></strong><span id="qScore" class="count"></span></div>
+    <div class="progress" id="progress" aria-hidden="true"></div>
+    <div aria-live="polite">
+      <div class="meta" id="meta"></div>
+      <div class="card" id="card"></div>
+    </div>
+    <div class="next-row"><button class="btn hidden" id="nextBtn">Next question</button></div>
+  </section>
+
+  <!-- RESULTS -->
+  <section id="results" class="hidden">
+    <h1>Your results</h1>
+    <p class="lede" id="resultsIntro"></p>
+    <div class="score"><strong id="scorePct"></strong><span id="scoreText"></span></div>
+    <div class="bank" id="bankResult"></div>
+    <h2>By area</h2>
+    <div class="bars" id="bars"></div>
+    <h2 id="reviewHead">To review</h2>
+    <ul class="review" id="review"></ul>
+    <div class="row">
+      <button class="btn" id="againBtn">Take another quiz</button>
+      <button class="btn ghost" id="homeBtn">Back to home</button>
+      <button class="btn ghost" id="printBtn">Print summary</button>
+    </div>
+  </section>
+</div>
+
+<script>
+/* ================= reference data ================= */
+const AREAS = {
+  safe:"Safeguarding",
+  incl:"Inclusion and SEND",
+  curr:"Curriculum and teaching",
+  ach:"Achievement",
+  att:"Attendance and behaviour",
+  pd:"Personal development and wellbeing",
+  ey:"Early years",
+  lead:"Subject leadership"
+};
+/* tags: which question tags each role receives */
+const ROLES = {
+  T:{name:"Teacher",desc:"Class teachers",group:"staff",tags:["T"],areas:["safe","incl","curr","ach","att","pd","ey"]},
+  E:{name:"ECT",desc:"Early career teachers in induction",group:"staff",tags:["E"],areas:["safe","incl","curr","ach","att","pd","ey"]},
+  A:{name:"Teaching assistant",desc:"TAs, ELSA and intervention staff",group:"staff",tags:["A"],areas:["safe","incl","curr","att","pd","ey"]},
+  M:{name:"Midday staff",desc:"Lunchtime supervisors",group:"staff",tags:["M"],areas:["safe","incl","att","pd"]},
+  P:{name:"PSHE lead",desc:"Leads PSHE, RSHE and Jigsaw",group:"lead",tags:["T","LEAD","P"],subject:"pshe",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
+  L:{name:"English and phonics lead",desc:"Leads reading, phonics and writing",group:"lead",tags:["T","LEAD","L"],subject:"reading",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
+  N:{name:"Maths lead",desc:"Leads mathematics",group:"lead",tags:["T","LEAD","N"],subject:"maths",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
+  Y:{name:"EYFS lead",desc:"Leads Reception",group:"lead",tags:["T","LEAD","Y"],year:"R",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
+  S:{name:"Other subject leader",desc:"Science, humanities, RE, arts, PE or computing",group:"lead",tags:["T","LEAD","S"],areas:["lead","safe","incl","curr","ach","att","pd","ey"]}
+};
+const YEAR_NAMES = {all:"All years",R:"Reception",1:"Year 1",2:"Year 2"};
+const TYPE_NAMES = {mc:"Knowledge check",sc:"Scenario",cv:"Inspector conversation"};
+const QUIZ_LEN = 10;
+const ALL=["T","E","A","M"], TCH=["T","E"], CLS=["T","E","A"], LEAD=["LEAD"];
+const CHECK_SVG = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="var(--on-green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+/* ================= question bank =================
+ a area | r role tags | y years ("all" or list) | s subject ("any" or key) | t type
+ mc/sc: o options (listed with correct answer at index c; options are shuffled at run time) | e explanation
+ cv: k key points | src source | loc needs local confirmation */
+const Q = [
+/* ---------- SAFEGUARDING ---------- */
+{a:"safe",r:ALL,y:"all",s:"any",t:"sc",q:"A child tells you something that makes you worried they are being harmed. What should you do?",
+ o:["Ask detailed questions to establish the facts before reporting","Listen calmly, do not promise to keep it secret, and report to the DSL straight away","Promise to keep it between you so the child keeps talking","Wait until the end of the day to see whether more comes out"],c:1,
+ e:"Listen and reassure the child, but never promise confidentiality. Avoid leading questions. Report to the designated safeguarding lead (DSL) or a deputy without delay.",src:"Keeping Children Safe in Education (KCSIE), Part one; school Safeguarding and Child Protection Policy"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"How should you record a child’s disclosure?",
+ o:["In your own words, with your view of what happened","As soon as possible, using the child’s own words, with the date, time and your name, on the school’s recording system","Only if the DSL asks you to","After you have spoken to the child’s parents"],c:1,
+ e:"Record facts promptly and accurately, using the child’s exact words where possible. The school records safeguarding concerns on CPOMS.",src:"KCSIE, Part one; School Development Plan 2025–26 (CPOMS)",loc:true},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"A child is at immediate risk of serious harm and you cannot reach the DSL or a deputy. What can you do?",
+ o:["Wait until the DSL is available","Contact the child’s parents first","Make a referral to children’s social care or call the police yourself","Email the headteacher and wait for a reply"],c:2,
+ e:"Anyone can make a referral. If a child is in immediate danger, contact children’s social care or the police directly, then inform the DSL as soon as possible.",src:"KCSIE, Part one"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"You are concerned about how a colleague behaves towards a pupil. Who should you tell?",
+ o:["The headteacher, or the chair of governors if the concern is about the headteacher","The colleague, so they can explain","Nobody, unless you are certain","Other staff, to see if they have noticed the same"],c:0,
+ e:"Concerns about adults working with children go to the headteacher. Concerns about the headteacher go to the chair of governors. The local authority designated officer (LADO) may be involved.",src:"KCSIE, Part four; school Safeguarding and Child Protection Policy",loc:true},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"What is a “low-level concern” about an adult?",
+ o:["A concern that can be ignored","Behaviour that does not meet the harm threshold but is inconsistent with the staff code of conduct – it should still be shared","A concern raised only by a parent","A concern about a visitor only"],c:1,
+ e:"Low-level concerns should still be shared with the headteacher or DSL. Recording them helps identify patterns early.",src:"KCSIE, Part four"},
+{a:"safe",r:ALL,y:["1","2"],s:"any",t:"sc",q:"In the playground a Year 2 pupil repeatedly pulls down another child’s trousers while others laugh. A colleague says it is just children being silly. What is the right response?",
+ o:["Agree – it is normal at this age","Tell the children to stop and take no further action","Treat it as possible child-on-child abuse, support the child affected and report to the DSL","Tell the parents at home time and leave it to them"],c:2,
+ e:"Child-on-child abuse should never be dismissed as banter or “part of growing up”. Staff should respond, support the child, and pass the concern to the DSL.",src:"School Child-on-Child Abuse Policy; KCSIE, Part one"},
+{a:"safe",r:ALL,y:"all",s:"computing",t:"mc",q:"KCSIE groups online risks into four areas. Which list is correct?",
+ o:["Content, contact, conduct and commerce","Content, curriculum, cameras and chat","Contact, cookies, conduct and cost","Cyberbullying, contact, chat and commerce"],c:0,
+ e:"The four Cs are content, contact, conduct and commerce.",src:"KCSIE, Part two; school Online and E-Safety Policy"},
+{a:"safe",r:CLS,y:"all",s:"computing",t:"sc",q:"While a pupil is using a school tablet, an inappropriate image appears on screen. What should you do?",
+ o:["Close it and carry on","Make the device safe, reassure the pupil and report it to the DSL so filtering can be checked","Ask the pupil how they found it and show a colleague","Ban the pupil from using tablets"],c:1,
+ e:"All staff should understand the school’s filtering and monitoring arrangements and report any failure so it can be checked.",src:"KCSIE, filtering and monitoring; school Online and E-Safety Policy"},
+{a:"safe",r:TCH,y:"all",s:"any",t:"mc",q:"A teacher discovers that female genital mutilation (FGM) appears to have been carried out on a girl under 18. What is the teacher’s legal duty?",
+ o:["Tell the DSL and let them decide","Report it personally to the police, and also inform the DSL","Speak to the girl’s parents first","Record it and monitor"],c:1,
+ e:"Teachers have a mandatory duty to report known cases of FGM in under-18s to the police themselves. They should also involve the DSL.",src:"KCSIE, Annex B; FGM mandatory reporting duty"},
+{a:"safe",r:["A","M"],y:"all",s:"any",t:"mc",q:"You become concerned that a girl may be at risk of female genital mutilation (FGM). What should you do?",
+ o:["Nothing unless you are certain","Report it to the DSL straight away","Ask the girl’s family about it","Wait until after the school holidays"],c:1,
+ e:"Any concern about FGM must go to the DSL without delay. Teachers also have a separate legal duty to report known cases to the police.",src:"KCSIE, Annex B"},
+{a:"safe",r:ALL,y:["R","1"],s:"any",t:"sc",q:"A child is often collected late by different adults you do not recognise, and often seems hungry. What should you do?",
+ o:["Say nothing – it is a family matter","Pass your concern to the DSL, as it may indicate neglect or a need for early help","Give the child extra food and take no further action","Refuse to release the child"],c:1,
+ e:"Small signs can build a picture. Share concerns with the DSL, who can decide whether early help or a referral is needed.",src:"KCSIE, Part one"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"Why do pupils with SEND need extra care in safeguarding?",
+ o:["They are less likely to be harmed","Adults may assume signs such as mood or injury relate to the child’s need rather than abuse, and the child may find it harder to tell someone","They do not need extra care","Only the SENCO can report concerns about them"],c:1,
+ e:"KCSIE highlights additional barriers for children with SEND. Staff should not assume that indicators are caused by the child’s disability.",src:"KCSIE, Part two"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"What should all staff understand about children’s mental health?",
+ o:["Staff should diagnose mental health conditions","Mental health problems can sometimes indicate abuse or neglect, so concerns should be shared with the DSL","Mental health is only a matter for parents","Young children do not have mental health needs"],c:1,
+ e:"Only trained professionals should diagnose. Staff are well placed to notice changes and should pass concerns on.",src:"KCSIE, Part one"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"You feel a safeguarding concern about school practice has not been dealt with properly inside school. Where else can you go?",
+ o:["Social media","The NSPCC whistleblowing advice line","A parent group","Nowhere"],c:1,
+ e:"Staff can use the NSPCC whistleblowing advice line if they feel unable to raise an issue internally, or if a concern has not been addressed.",src:"KCSIE, Part one"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"sc",q:"A pupil repeats extremist views they say they heard at home. What should you do?",
+ o:["Ignore it – they are too young to understand","Tell the pupil off in front of the class","Pass the concern to the DSL, who will decide whether a Prevent referral is needed","Call the police yourself"],c:2,
+ e:"Under the Prevent duty, staff should share concerns about radicalisation with the DSL.",src:"KCSIE, Part one; Prevent duty guidance"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"How is safeguarding reported on the school’s inspection report card?",
+ o:["As met or not met","On a five-point scale","It is not reported","Only as part of leadership"],c:0,
+ e:"Safeguarding is judged as met or not met. The other evaluation areas use a five-point scale.",src:"Ofsted school inspection toolkit (renewed framework)"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"sc",q:"At lunchtime a child tells you another child hit them and told them not to tell anyone. What do you do?",
+ o:["Tell the child to sort it out themselves","Make sure the child is safe, listen, and pass the information on to the class teacher or DSL in line with school procedures","Keep it secret as asked","Punish the other child straight away without checking"],c:1,
+ e:"Take it seriously. Being told to keep a secret is itself a warning sign. Record and pass it on.",src:"School Child-on-Child Abuse Policy; Safeguarding and Child Protection Policy",loc:true},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"Which statement best reflects the school’s expected culture of safeguarding?",
+ o:["It could not happen here","It could happen here","Safeguarding is the DSL’s job","Safeguarding matters only when there is a disclosure"],c:1,
+ e:"KCSIE asks all staff to hold an “it could happen here” attitude. The School Development Plan aims for safeguarding to be at the centre of everything the school does.",src:"KCSIE, Part one; School Development Plan 2025–26"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"Which part of Keeping Children Safe in Education must all staff who work directly with children read?",
+ o:["Part one","Part four only","Annex C only","None – it is for leaders"],c:0,
+ e:"All staff who work directly with children, including midday staff, should read at least Part one.",src:"KCSIE"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"A parent films a school event and posts the video on social media. It shows other children. What does the school ask parents to do?",
+ o:["Share freely","Not share photographs or videos taken at school","Share only on private accounts","Ask the class teacher first"],c:1,
+ e:"The school’s photography fact sheet asks parents and carers not to share photographs or videos taken at school.",src:"School photography and videography fact sheet"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"You want to take a photograph of children’s work in progress. What should you do?",
+ o:["Use your personal phone and delete it later","Follow the school’s policy on mobile phones and cameras, using school equipment where required","Ask a parent to take it","Take it and post it on the class page"],c:1,
+ e:"Schools with Reception classes must have a policy on mobile phones and cameras under the EYFS framework. Follow the school’s policy.",src:"EYFS statutory framework; school Online and E-Safety Policy",loc:true},
+{a:"safe",r:ALL,y:"all",s:"any",t:"sc",q:"A child often arrives without a coat in cold, wet weather and their clothes are regularly dirty. What should you do?",
+ o:["Lend a coat and say nothing","Record what you have seen and pass it to the DSL – it may indicate neglect","Speak to the parent in the playground","Wait until it happens every day"],c:1,
+ e:"Neglect often shows through a pattern of small signs. The DSL can put the pieces together.",src:"KCSIE, Part one"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"sc",q:"A child says quietly, “I don’t want to go home tonight.” What do you do?",
+ o:["Tell them home is the best place","Stay calm, ask an open question such as “Can you tell me more?”, then record and tell the DSL straight away","Ignore it – children say things like this","Ring the parent to ask why"],c:1,
+ e:"Use open questions only and do not investigate. A child reluctant to go home needs a same-day response from the DSL.",src:"KCSIE, Part one"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"sc",q:"An adult you do not recognise is at the playground fence talking to children at lunchtime. What should you do?",
+ o:["Carry on supervising","Calmly move the children away and tell the office or a senior leader straight away","Ask the adult to leave and take no further action","Take a photograph of the adult on your phone"],c:1,
+ e:"Keep children safe first, then alert leaders so site security procedures can be followed.",src:"School site security and safeguarding procedures",loc:true},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"After you report a disclosure to the DSL, who else should you discuss it with?",
+ o:["Colleagues in the staffroom","Only those who need to know, as directed by the DSL","The child’s friends’ parents","Nobody ever, including the DSL"],c:1,
+ e:"Information is shared on a need-to-know basis. Gossip can put the child at greater risk.",src:"KCSIE, Part one; school Safeguarding and Child Protection Policy"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"sc",q:"During play, two Year 1 children act out scenes from a violent video game rated 18. What should you do?",
+ o:["Nothing – it is only a game","Redirect the play and let the class teacher or DSL know, as it may show exposure to unsuitable content","Tell the children they are naughty","Ban the game in school"],c:1,
+ e:"Exposure to age-inappropriate content can be a safeguarding concern. Pass it on so it can be considered alongside other information.",src:"KCSIE, Part one; school Online and E-Safety Policy"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"mc",q:"Is it acceptable to contact a pupil’s parent from your personal social media account?",
+ o:["Yes, if it saves time","No – use school communication channels in line with the staff code of conduct","Yes, if the parent is a friend","Only in the holidays"],c:1,
+ e:"Personal accounts blur professional boundaries. Use school systems.",src:"Staff code of conduct; school Online and E-Safety Policy",loc:true},
+{a:"safe",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “What would you do if a child told you something worrying?”",
+ k:["Listen calmly and let the child talk; do not ask leading questions","Never promise to keep it secret; explain you will need to tell someone who can help","Record the child’s own words, the date and time, as soon as possible on CPOMS","Report to the DSL or a deputy straight away","Know what to do if the DSL is not available or the child is in immediate danger"],
+ src:"KCSIE, Part one; school Safeguarding and Child Protection Policy"},
+{a:"safe",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “Who are your safeguarding leads, and how do you keep up to date?”",
+ k:["Name the DSL and the deputy DSLs","Describe your annual safeguarding training and reading KCSIE Part one","Mention regular updates – the School Development Plan says safeguarding information is shared in weekly staff meetings","Give a recent example of an update and what it changed in your practice"],
+ src:"School Development Plan 2025–26; safeguarding contact details",loc:true},
+{a:"safe",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “What signs might make you worried about a child?”",
+ k:["Changes in behaviour, mood or appearance","Unexplained injuries or explanations that do not fit","Signs of neglect such as hunger, poor hygiene or unsuitable clothing","Frequent absence or lateness","What the child says or plays out; knowing that SEND can mask signs"],
+ src:"KCSIE, Part one"},
+{a:"safe",r:["LEAD"],y:"all",s:"any",t:"cv",q:"The inspector asks a leader: “How does safeguarding link to your subject?”",
+ k:["Content that teaches pupils to keep safe, for example online safety or trusted adults","Safe practice in lessons such as trips, PE or DT tools","How teaching supports the school’s safeguarding curriculum","How staff know what to do if a lesson prompts a disclosure"],
+ src:"School safeguarding curriculum; KCSIE"},
+
+/* ---------- INCLUSION AND SEND ---------- */
+{a:"incl",r:CLS,y:"all",s:"any",t:"mc",q:"At the last inspection (September 2022), what did Ofsted ask the school to improve?",
+ o:["Attendance","Staff subject knowledge to adapt the curriculum well, particularly for pupils with SEND","Governance","The phonics programme"],c:1,
+ e:"Inspectors will want to see how this has been addressed. It remains a priority in the School Development Plan.",src:"Ofsted report, September 2022; School Development Plan 2025–26"},
+{a:"incl",r:TCH,y:"all",s:"any",t:"mc",q:"What are the four stages of the graduated approach to SEN support?",
+ o:["Plan, teach, test, report","Assess, plan, do, review","Identify, refer, wait, review","Observe, record, refer, close"],c:1,
+ e:"The graduated approach is a cycle of assess, plan, do and review, involving parents and the pupil.",src:"SEND Code of Practice 0–25 (2015)"},
+{a:"incl",r:CLS,y:"all",s:"any",t:"mc",q:"A pupil begins to fall behind. What is the first response?",
+ o:["Place them on the SEN register","High-quality teaching adapted to their needs","Remove them from lessons for intervention","Wait for a diagnosis"],c:1,
+ e:"The school provides quality first teaching for all pupils. Extra support follows when this is not enough.",src:"School SEND page; SEND Code of Practice"},
+{a:"incl",r:ALL,y:"all",s:"any",t:"mc",q:"Does a SEND diagnosis mean a pupil is automatically placed on the SEN register?",
+ o:["Yes, always","No – the school decides using assessments by teachers and professionals","Only if parents ask","Only in Reception"],c:1,
+ e:"The school’s SEND page states that a diagnosis does not automatically mean a pupil is placed on the register. Parents are told when a child is added or removed.",src:"School SEND page"},
+{a:"incl",r:CLS,y:"all",s:"any",t:"mc",q:"What are the four broad areas of need in the SEND Code of Practice?",
+ o:["Reading, writing, maths and behaviour","Communication and interaction; cognition and learning; social, emotional and mental health; sensory and/or physical","Speech, hearing, sight and movement","Learning, behaviour, attendance and health"],c:1,
+ e:"These four areas help plan support. A pupil may have needs in more than one area.",src:"SEND Code of Practice 0–25 (2015)"},
+{a:"incl",r:TCH,y:"all",s:"any",t:"mc",q:"How does the school use Surrey’s Ordinarily Available Provision (OAP) guidance?",
+ o:["It is not used","To RAG rate provision and identify pupils with barriers to learning","Only for pupils with an EHCP","Only by the local authority"],c:1,
+ e:"OAP describes the support a mainstream school should normally provide. The SENCO shares it with staff to support early identification.",src:"School Development Plan 2025–26",loc:true},
+{a:"incl",r:TCH,y:"all",s:"any",t:"sc",q:"Which is the best way to adapt a lesson for a pupil with SEND?",
+ o:["Give an easier worksheet on a different topic","Keep the same learning goal and change the route – smaller steps, visuals, pre-taught vocabulary, concrete resources","Send the pupil out with a TA for every lesson","Lower expectations so they feel successful"],c:1,
+ e:"Pupils with SEND should learn the same ambitious curriculum wherever possible. Adaptation changes how they get there, not what they learn.",src:"Ofsted report, September 2022; SEND Code of Practice"},
+{a:"incl",r:["A"],y:"all",s:"any",t:"sc",q:"You are delivering an intervention to a small group. What makes it most effective?",
+ o:["Following the programme without reference to class learning","Knowing the intended outcome, linking it to class learning, and feeding back to the teacher","Keeping the same group all year without review","Using the time to complete unfinished class work"],c:1,
+ e:"Interventions work best when they are short, structured, linked to class learning and reviewed regularly. The school reviews interventions every six weeks.",src:"School Development Plan 2025–26"},
+{a:"incl",r:ALL,y:"all",s:"any",t:"mc",q:"Who is the school’s SEND co-ordinator (SENCO)?",
+ o:["Mrs Z Hazell","The local authority","The class teacher","The chair of governors"],c:0,
+ e:"Mrs Z Hazell is the SENCO, with SENCO support from Miss S Morris. Both can be contacted through the school office.",src:"School SEND page"},
+{a:"incl",r:ALL,y:"all",s:"any",t:"mc",q:"Which law requires schools to make reasonable adjustments for disabled pupils?",
+ o:["The Education Act 1944","The Equality Act 2010","The Children Act 1989","The Data Protection Act 2018"],c:1,
+ e:"The Equality Act 2010 places a duty on schools to make reasonable adjustments. The school’s Accessibility Plan sets out how it improves access.",src:"Equality Act 2010; school Accessibility Plan"},
+{a:"incl",r:TCH,y:"all",s:"any",t:"mc",q:"Which pupils attract pupil premium funding?",
+ o:["All pupils with SEND","Pupils eligible for free school meals at any point in the last six years, and pupils who are or were looked after","Pupils with English as an additional language","Pupils with low attainment"],c:1,
+ e:"Inspectors will look at how well disadvantaged pupils learn. The SDP sets a goal that vulnerable groups make better progress than all pupils.",src:"Ofsted report, September 2022; School Development Plan 2025–26"},
+{a:"incl",r:ALL,y:"all",s:"any",t:"mc",q:"What does ELSA stand for?",
+ o:["Early Learning Support Assessment","Emotional Literacy Support Assistant","English Language Support Adviser","Early Literacy Screening Activity"],c:1,
+ e:"ELSAs support children who need help with emotions and wellbeing. The SDP aims for all children in need to have access to ELSA.",src:"School Development Plan 2025–26"},
+{a:"incl",r:["M","A"],y:"all",s:"any",t:"sc",q:"A pupil with autism finds the noisy lunch hall distressing and runs out. What is the best response?",
+ o:["Tell them off for leaving","Take them back into the hall straight away","Stay calm, keep them safe, use calm and clear language, follow any agreed plan, and tell the class teacher or SENCO","Leave them alone until they come back"],c:2,
+ e:"Know the reasonable adjustments agreed for the pupil, such as a quieter space. Report the incident so the plan can be reviewed.",src:"School SEND Policy; Equality Act 2010",loc:true},
+{a:"incl",r:TCH,y:"all",s:"any",t:"cv",q:"The inspector asks: “How do you adapt this lesson so pupils with SEND learn the same curriculum?”",
+ k:["Keep the same ambitious learning goal for all pupils","Break learning into smaller steps and check understanding often","Pre-teach key vocabulary; use visuals and concrete resources","Deploy adults with a clear purpose","Link to each pupil’s support plan targets and Surrey OAP guidance"],
+ src:"Ofsted report, September 2022; School Development Plan 2025–26"},
+{a:"incl",r:TCH,y:"all",s:"any",t:"cv",q:"The inspector asks: “Tell me about a pupil with SEND in your class. What do they need, and how do you know the support is working?”",
+ k:["Describe the pupil’s needs from their support plan","Give specific targets and what you do differently in lessons","Show evidence of progress, for example work over time","Explain the review cycle with the SENCO and parents","Include the pupil’s own views"],
+ src:"SEND Code of Practice; School Development Plan 2025–26 (case studies)"},
+{a:"incl",r:CLS,y:"all",s:"any",t:"mc",q:"The school takes part in SAATIS. What is it?",
+ o:["A reading scheme","Surrey Attachment Aware and Trauma Informed Schools programme","A maths intervention","An attendance tracking system"],c:1,
+ e:"SAATIS training helps staff understand attachment and trauma. Staff who complete it share learning with colleagues.",src:"School Development Plan 2025–26"},
+{a:"incl",r:["A","E","T"],y:"all",s:"any",t:"mc",q:"How often must a pupil’s education, health and care plan (EHCP) be reviewed?",
+ o:["Every five years","At least every 12 months","Only when the pupil changes school","Every term by law"],c:1,
+ e:"EHCPs are reviewed at least annually. Staff who work with the pupil contribute evidence.",src:"SEND Code of Practice 0–25 (2015)"},
+{a:"incl",r:["A"],y:"all",s:"any",t:"mc",q:"What is the best way for a TA to support a pupil in class?",
+ o:["Complete tasks for the pupil so they keep up","Help the pupil to work independently – prompt, question and step back when they are ready","Sit with the same pupil in every lesson regardless of need","Keep the pupil busy with colouring"],c:1,
+ e:"Support should build independence, not dependence. Talk with the teacher about when to step back.",src:"School Development Plan 2025–26 (use of support staff)"},
+{a:"incl",r:["A","M"],y:"all",s:"any",t:"sc",q:"A parent at the gate asks you how their child is getting on with their SEN support. What should you do?",
+ o:["Share everything you know","Be friendly, and direct them to the class teacher or SENCO, who can discuss it properly","Tell them you are not allowed to speak to parents","Discuss it with other parents present"],c:1,
+ e:"Conversations about SEN support belong with the teacher or SENCO, in private.",src:"School SEND information report",loc:true},
+{a:"incl",r:TCH,y:"all",s:"any",t:"mc",q:"What is adaptive teaching?",
+ o:["Planning a different lesson for every pupil","Responding to pupils’ needs within the lesson while keeping high expectations for all","Grouping pupils by ability for the whole year","Giving pupils with SEND a separate curriculum"],c:1,
+ e:"Adaptive teaching adjusts support, not ambition. This links directly to the 2022 area for improvement.",src:"Teachers’ Standards; Initial Teacher Training and Early Career Framework"},
+{a:"incl",r:TCH,y:["R","1"],s:"any",t:"sc",q:"You notice a child rarely speaks in class and struggles to follow two-step instructions. What should you do first?",
+ o:["Wait to see if it improves by Year 2","Record your observations, adapt your teaching, talk to parents and raise it with the SENCO for early identification","Refer them directly to a speech therapist","Move them to a quieter class"],c:1,
+ e:"Early identification is a school priority. The SENCO can advise on next steps and external support.",src:"School Development Plan 2025–26 (early intervention)"},
+{a:"incl",r:["LEAD"],y:"all",s:"any",t:"cv",q:"The inspector asks a subject leader: “How well do pupils with SEND and disadvantaged pupils learn in your subject?”",
+ k:["What you know from monitoring their work and talking to them","How the curriculum is adapted without lowering ambition","Training you have given staff on adapting your subject","Evidence of progress compared with other pupils","What you are doing where gaps remain"],
+ src:"Ofsted report, September 2022; School Development Plan 2025–26"},
+
+/* ---------- CURRICULUM AND TEACHING ---------- */
+{a:"curr",r:CLS,y:"all",s:"reading",t:"mc",q:"Which phonics programme does the school use?",
+ o:["Read Write Inc.","Little Wandle Letters and Sounds Revised","Jolly Phonics","Letters and Sounds (2007)"],c:1,
+ e:"The school is accredited with Little Wandle Letters and Sounds Revised. The SDP aims to ensure fidelity to the scheme.",src:"School website; School Development Plan 2025–26"},
+{a:"curr",r:CLS,y:"all",s:"reading",t:"sc",q:"A child has not grasped today’s phonics lesson. What should happen?",
+ o:["Revisit it next week","A Keep-up session the same day","Move them to a lower group permanently","Send practice sheets home"],c:1,
+ e:"Children who fall behind receive daily Keep-up support so they keep pace with the programme.",src:"School Development Plan 2025–26; Little Wandle"},
+{a:"curr",r:CLS,y:"all",s:"reading",t:"mc",q:"Reading books for children learning phonics should be:",
+ o:["Chosen freely by the child","Matched exactly to the child’s phonics stage","One level above to challenge them","Picture books only"],c:1,
+ e:"Books must be fully decodable at the child’s stage so they can practise reading with success.",src:"School Development Plan 2025–26"},
+{a:"curr",r:CLS,y:"all",s:"reading",t:"mc",q:"How often should children on the phonics programme read in school each week?",
+ o:["Once","At least three times","Only when time allows","Daily with a parent volunteer only"],c:1,
+ e:"The SDP states that all children on the phonics scheme read at least three times a week.",src:"School Development Plan 2025–26"},
+{a:"curr",r:CLS,y:"all",s:"reading",t:"mc",q:"What does “fidelity” to the phonics programme mean?",
+ o:["Using a mix of schemes to suit each child","Teaching the programme as designed, using its own resources and sequence","Teaching phonics only in Reception","Letting each class choose its own order"],c:1,
+ e:"Mixing schemes can confuse children. Consistency across all classes is expected.",src:"School Development Plan 2025–26; Little Wandle"},
+{a:"curr",r:CLS,y:"all",s:"reading",t:"mc",q:"What does the school plan for daily story time?",
+ o:["Ten minutes on Fridays","A daily 20-minute story time covering a range of genres","Story time only in Reception","It is optional"],c:1,
+ e:"Daily story time supports a love of reading, one of the school’s priorities.",src:"School Development Plan 2025–26"},
+{a:"curr",r:CLS,y:"all",s:"reading",t:"mc",q:"Which of these does the school use to promote reading for pleasure?",
+ o:["SWAP boxes, bedtime book bags and library visits","Reading tests every week","Reading only in phonics lessons","Paid reading tutors"],c:0,
+ e:"The SDP also includes Book Week, visiting storytellers and reading volunteers.",src:"School Development Plan 2025–26"},
+{a:"curr",r:CLS,y:"all",s:"reading",t:"cv",q:"The inspector asks: “How do you make sure no child falls behind in phonics?”",
+ k:["Teach the Little Wandle programme with fidelity","Assess regularly and identify children at risk quickly","Provide same-day Keep-up sessions","Match reading books exactly to the phonics stage","Read with the lowest 20% more often"],
+ src:"School Development Plan 2025–26"},
+{a:"curr",r:TCH,y:"all",s:"reading",t:"cv",q:"The inspector listens to a pupil read and asks you: “Why is this the right book for this child?”",
+ k:["It matches the sounds the child has been taught","The child can decode most words independently","It builds fluency through re-reading","How you know the child’s current phonics stage from assessment"],
+ src:"School Development Plan 2025–26; Little Wandle"},
+{a:"curr",r:TCH,y:"all",s:"any",t:"cv",q:"The inspector asks: “Where does this lesson sit in the sequence? What did pupils learn before, and what comes next?”",
+ k:["Name the prior knowledge the lesson builds on","Explain the key knowledge pupils should remember","Describe how this prepares them for the next unit or year","Explain how you check what pupils remember","Explain how the Year A / Year B cycle keeps progression in mixed-age classes"],
+ src:"Ofsted report, September 2022; School Development Plan 2025–26"},
+{a:"curr",r:TCH,y:["1","2"],s:"any",t:"mc",q:"How are foundation subjects planned for the mixed-age Year 1 and Year 2 classes?",
+ o:["Each teacher plans independently","A two-year rolling curriculum (Year A and Year B)","The same topics every year","By following a published scheme without changes"],c:1,
+ e:"Foundation subject planning has been rewritten into a Year A and Year B format. Subject leaders audit it for progression and coverage.",src:"School Development Plan 2025–26",loc:true},
+{a:"curr",r:TCH,y:["1","2"],s:"maths",t:"mc",q:"How is maths organised in the mixed-age Key Stage 1 classes?",
+ o:["Taught as mixed-age classes","Taught in year groups, following guidance from the Surrey Maths Hub","Taught through topic work only","Set by ability across both years"],c:1,
+ e:"The SDP states maths is taught in year groups, following Maths Hub advice.",src:"School Development Plan 2025–26",loc:true},
+{a:"curr",r:CLS,y:"all",s:"maths",t:"mc",q:"What does “CPA” stand for in maths teaching?",
+ o:["Count, practise, apply","Concrete, pictorial, abstract","Calculate, prove, answer","Challenge, pace, assess"],c:1,
+ e:"Pupils move from physical objects, to pictures, to symbols, which builds secure understanding.",src:"Maths Hub guidance"},
+{a:"curr",r:CLS,y:["1","2"],s:"maths",t:"mc",q:"The School Development Plan mentions Number Stacks. What is it used for?",
+ o:["Maths intervention","Reading assessment","Behaviour rewards","Attendance tracking"],c:0,
+ e:"It is one of the interventions reviewed every six weeks to check impact.",src:"School Development Plan 2025–26"},
+{a:"curr",r:TCH,y:"all",s:"maths",t:"cv",q:"The inspector asks: “How do you know which pupils are keeping up in maths, and what do you do for those who are not?”",
+ k:["Check understanding in every lesson, for example through questioning and short tasks","Use assessment to spot gaps quickly","Give same-day or next-day support","Use targeted interventions such as Number Stacks and review them every six weeks","Discuss pupils at termly pupil progress meetings"],
+ src:"School Development Plan 2025–26"},
+{a:"curr",r:CLS,y:"all",s:"maths",t:"mc",q:"Which NCETM programme focuses on number fluency from Reception to Year 2?",
+ o:["Mastering Number","Number Stacks","Power Maths","White Rose Premium"],c:0,
+ e:"Mastering Number builds fluency and number sense through short daily sessions. Check whether it is used in school.",src:"NCETM",loc:true},
+{a:"curr",r:TCH,y:"all",s:"maths",t:"cv",q:"The inspector asks: “What do pupils need to know really well in number by the end of Year 2?”",
+ k:["Place value within 100","Number bonds and addition and subtraction facts to 20","The 2, 5 and 10 multiplication tables","Using mathematical vocabulary to explain","How earlier learning in Reception and Year 1 builds towards this"],
+ src:"National Curriculum, Key Stage 1 mathematics"},
+{a:"curr",r:TCH,y:"all",s:"any",t:"mc",q:"When an inspector talks to you about your subject, what are they mainly trying to find out?",
+ o:["The format of your lesson plans","How the curriculum builds pupils’ knowledge over time and how well pupils learn it","How much marking you do","Whether you use the interactive whiteboard"],c:1,
+ e:"Inspectors visit lessons, look at pupils’ work and talk to staff and pupils to see how teaching builds knowledge over time.",src:"Ofsted report, September 2022; Ofsted school inspection toolkit"},
+{a:"curr",r:TCH,y:"all",s:"any",t:"mc",q:"Why do teachers use regular retrieval practice?",
+ o:["To fill spare time","To help pupils remember key knowledge in the long term and show gaps","To grade pupils","To replace new teaching"],c:1,
+ e:"The 2022 report praised regular chances to revisit learning, which help pupils remember key knowledge.",src:"Ofsted report, September 2022"},
+{a:"curr",r:TCH,y:["1"],s:"history",t:"cv",q:"The inspector asks: “What do you want Year 1 to remember about the Great Fire of London, and how does it prepare them for later history?”",
+ k:["Key facts: when and where it happened, why it spread, what changed afterwards","Historical vocabulary, for example past, present, source","Using sources such as Samuel Pepys’ diary","Chronology and comparing then and now","How this links to later units in the rolling cycle"],
+ src:"School curriculum page (Year 1 history)"},
+{a:"curr",r:TCH,y:"all",s:"history",t:"mc",q:"Which of these is a Key Stage 1 history requirement?",
+ o:["The Roman Empire in detail","Events beyond living memory that are significant nationally or globally","The Second World War only","Local history is not allowed"],c:1,
+ e:"KS1 history also covers changes within living memory, significant people, and significant local places and events.",src:"National Curriculum, Key Stage 1 history"},
+{a:"curr",r:TCH,y:["2"],s:"geography",t:"cv",q:"The inspector asks: “How does the Isle of Struay unit build geographical knowledge?”",
+ k:["Studying a small area of the UK that contrasts with Virginia Water","Human and physical features, with correct vocabulary","Using simple maps and aerial photographs","Comparing the locality with pupils’ own area","What pupils already knew and what comes next"],
+ src:"School curriculum page (Year 2 geography); National Curriculum"},
+{a:"curr",r:TCH,y:"all",s:"geography",t:"mc",q:"Which is part of Key Stage 1 geography?",
+ o:["Naming the world’s seven continents and five oceans","Plate tectonics","Economic trade routes","Climate zones in detail"],c:0,
+ e:"KS1 geography includes locational knowledge, place knowledge, human and physical geography, and fieldwork.",src:"National Curriculum, Key Stage 1 geography"},
+{a:"curr",r:TCH,y:"all",s:"science",t:"cv",q:"The inspector asks: “How do pupils work scientifically in your class?”",
+ k:["Asking simple questions","Observing closely and using simple equipment","Carrying out simple tests","Identifying, classifying and recording findings","Using scientific vocabulary accurately"],
+ src:"National Curriculum, Key Stage 1 science"},
+{a:"curr",r:TCH,y:"all",s:"science",t:"mc",q:"Which topic is taught in Year 1 science?",
+ o:["Everyday materials","Electricity","Forces and magnets","Light"],c:0,
+ e:"Year 1 also covers plants, animals including humans, and seasonal changes.",src:"National Curriculum, Key Stage 1 science"},
+{a:"curr",r:CLS,y:"all",s:"pshe",t:"mc",q:"Which programme does the school use for PSHE?",
+ o:["Jigsaw","PSHE Association only","SEAL","No programme"],c:0,
+ e:"Classroom charters and first-week teaching on safety and trusted adults link to Jigsaw.",src:"School Development Plan 2025–26"},
+{a:"curr",r:TCH,y:"all",s:"pshe",t:"cv",q:"The inspector asks: “How do you teach pupils to keep themselves safe?”",
+ k:["Relationships education is statutory in primary schools","Age-appropriate teaching through Jigsaw","Trusted adults – pupils can name who they would tell","Online safety – telling an adult if something worries them","The safeguarding curriculum taught in the first week of term"],
+ src:"School Development Plan 2025–26; school safeguarding curriculum"},
+{a:"curr",r:CLS,y:"all",s:"pshe",t:"mc",q:"Jigsaw is organised into six units taught across the school at the same time. What are they called?",
+ o:["Puzzles","Pieces","Chapters","Modules"],c:0,
+ e:"The six Puzzles are Being Me in My World, Celebrating Difference, Dreams and Goals, Healthy Me, Relationships and Changing Me.",src:"Jigsaw PSHE programme"},
+{a:"curr",r:CLS,y:"all",s:"pshe",t:"sc",q:"During a PSHE lesson, a child makes a comment that suggests they may be at risk. What should you do?",
+ o:["Carry on and talk to them next week","Respond calmly, avoid questioning in front of the class, speak to the child privately if appropriate, and report to the DSL the same day","Ask the class to share similar experiences","Tell the child to wait until after the lesson"],c:1,
+ e:"PSHE lessons can prompt disclosures. Ground rules help, but any concern must still go to the DSL.",src:"KCSIE, Part one; Jigsaw ground rules"},
+{a:"curr",r:TCH,y:"all",s:"pshe",t:"mc",q:"Which Jigsaw Puzzle helps pupils understand that people are different and to respect those differences?",
+ o:["Celebrating Difference","Dreams and Goals","Healthy Me","Changing Me"],c:0,
+ e:"Celebrating Difference also covers bullying and links to British values.",src:"Jigsaw PSHE programme"},
+{a:"curr",r:CLS,y:"all",s:"computing",t:"mc",q:"Which online safety message suits Key Stage 1 pupils best?",
+ o:["Never use the internet","Tell a trusted adult if anything online worries or upsets you","Keep online problems to yourself","Only use devices at home"],c:1,
+ e:"Young pupils should learn simple, clear rules and know who to tell.",src:"School Online and E-Safety Policy"},
+{a:"curr",r:TCH,y:"all",s:"computing",t:"mc",q:"Which is part of Key Stage 1 computing?",
+ o:["Understanding what algorithms are and creating simple programs","Writing Python code","Building websites","Using spreadsheets for accounts"],c:0,
+ e:"KS1 computing also covers debugging, using technology purposefully and using technology safely.",src:"National Curriculum, Key Stage 1 computing"},
+{a:"curr",r:TCH,y:"all",s:"re",t:"cv",q:"The inspector asks: “What should pupils know about religions and beliefs by the end of Year 2?”",
+ k:["Following the locally agreed syllabus","Key beliefs, practices and festivals of the religions studied","Correct vocabulary","Respect for people whose beliefs differ from their own","Links to assemblies with speakers from different faiths"],
+ src:"School Development Plan 2025–26",loc:true},
+{a:"curr",r:TCH,y:"all",s:"re",t:"mc",q:"Who decides the content of RE in a community school such as Trumps Green?",
+ o:["Each teacher","The locally agreed syllabus","The National Curriculum","Parents"],c:1,
+ e:"Community schools follow the locally agreed syllabus. RE is not part of the National Curriculum but must be taught.",src:"Education law on RE; local agreed syllabus",loc:true},
+{a:"curr",r:TCH,y:"all",s:"pe",t:"cv",q:"The inspector asks: “How does PE develop pupils’ physical skills over time?”",
+ k:["Clear progression in movement skills","Weekly balance and coordination sessions (from the Spring term)","How the PE and Sport Premium is used","Links to the Activemark award","Preparation for Bikeability in junior school"],
+ src:"School Development Plan 2025–26"},
+{a:"curr",r:TCH,y:"all",s:"pe",t:"mc",q:"Which is part of Key Stage 1 PE?",
+ o:["Mastering running, jumping, throwing and catching, balance, agility and co-ordination","Competitive team sports only","Swimming 25 metres","Outdoor adventurous activities only"],c:0,
+ e:"KS1 PE also covers simple team games and dance.",src:"National Curriculum, Key Stage 1 PE"},
+{a:"curr",r:TCH,y:"all",s:"foundation",t:"cv",q:"The inspector asks: “What should pupils know and be able to do by the end of this unit, and how does it build on earlier units?”",
+ k:["The key knowledge and skills for the unit","What pupils learned before","Subject vocabulary","How you check what pupils remember","Where the unit sits in the Year A / Year B cycle"],
+ src:"School Development Plan 2025–26"},
+{a:"curr",r:TCH,y:"all",s:"foundation",t:"mc",q:"In design and technology, which process should pupils follow?",
+ o:["Design, make and evaluate","Copy, colour and display","Watch and repeat","Draw and label only"],c:0,
+ e:"KS1 DT also includes technical knowledge and cooking and nutrition.",src:"National Curriculum, Key Stage 1 design and technology"},
+{a:"curr",r:TCH,y:"all",s:"foundation",t:"mc",q:"Which is part of Key Stage 1 art and design?",
+ o:["Learning about the work of a range of artists, craft makers and designers","Art history exams","Only free painting","Photography only"],c:0,
+ e:"KS1 art also covers using materials creatively and developing drawing, painting and sculpture.",src:"National Curriculum, Key Stage 1 art and design"},
+{a:"curr",r:TCH,y:["1","2"],s:"writing",t:"cv",q:"The inspector asks: “How do you teach writing so that Year 1 and Year 2 pupils in the same class both make progress?”",
+ k:["The replanned writing curriculum with new texts for mixed-age classes","Secure transcription – spelling linked to phonics, and handwriting","Modelling and shared writing","Year-group expectations for each pupil","Adaptation for pupils with SEND"],
+ src:"School Development Plan 2025–26"},
+{a:"curr",r:CLS,y:"all",s:"writing",t:"mc",q:"What does early writing depend on most?",
+ o:["Neat presentation","Secure phonics and handwriting (transcription)","Long pieces of writing","Copying from the board"],c:1,
+ e:"If spelling and handwriting are not secure, pupils have little capacity left for composing ideas.",src:"National Curriculum, Key Stage 1 English"},
+{a:"curr",r:TCH,y:"all",s:"writing",t:"mc",q:"How does the school check that writing judgements are accurate?",
+ o:["It does not","Termly cross-moderation of writing with local partner (RLP) schools","Parents mark the writing","Only external tests"],c:1,
+ e:"Cross-moderation with partner schools takes place once a term for writing, maths and reading.",src:"School Development Plan 2025–26",loc:true},
+{a:"curr",r:["E"],y:"all",s:"any",t:"mc",q:"How long is the statutory induction period for early career teachers?",
+ o:["One term","One year","Two years","Three years"],c:2,
+ e:"ECT induction lasts two years, with a mentor and an induction tutor.",src:"DfE statutory guidance on induction"},
+{a:"curr",r:["E"],y:"all",s:"any",t:"mc",q:"Who supports an ECT during induction?",
+ o:["A mentor and an induction tutor","Only the headteacher","Nobody – ECTs work independently","Only the local authority"],c:0,
+ e:"The mentor gives regular support. The induction tutor carries out progress reviews and formal assessments.",src:"DfE statutory guidance on induction"},
+{a:"curr",r:["E"],y:"all",s:"any",t:"cv",q:"The inspector asks: “What support have you had to develop your subject knowledge?”",
+ k:["Mentor meetings and induction programme","Training such as Little Wandle refresher training","Termly SEND CPD led by the SENCO","Support from subject leaders","An example of how training changed your teaching"],
+ src:"School Development Plan 2025–26"},
+{a:"curr",r:["E"],y:"all",s:"any",t:"cv",q:"The inspector asks: “How do leaders help you manage your workload?”",
+ k:["Shared planning and schemes such as Little Wandle","Protected time for induction","Clear policies, for example on marking","Who you go to if workload becomes a concern"],
+ src:"DfE statutory guidance on induction",loc:true},
+{a:"curr",r:["A"],y:"all",s:"reading",t:"mc",q:"After running a phonics Keep-up session, what should you do?",
+ o:["Nothing more","Tell the class teacher how each child got on","Move the children to another group","Send the children’s books home"],c:1,
+ e:"Feedback helps the teacher decide what each child needs next.",src:"School Development Plan 2025–26"},
+{a:"curr",r:["A"],y:"all",s:"any",t:"cv",q:"The inspector asks a TA: “What is the purpose of the activity you are doing with this group?”",
+ k:["The learning goal, in the teacher’s words","How it links to what the class is learning","How you know if pupils have understood","How you feed back to the teacher"],
+ src:"School Development Plan 2025–26 (use of support staff)"},
+{a:"curr",r:["A"],y:"all",s:"any",t:"mc",q:"You are unsure what you should be doing during the teacher’s input. What is best?",
+ o:["Prepare resources for tomorrow","Ask the teacher beforehand – for example, observe target pupils, note misconceptions or quietly prompt","Leave the room","Mark books from last week"],c:1,
+ e:"Every adult should have a clear role in each part of the lesson.",src:"School Development Plan 2025–26"},
+
+/* ---------- ACHIEVEMENT ---------- */
+{a:"ach",r:TCH,y:["1","2"],s:"reading",t:"mc",q:"When do pupils take the phonics screening check?",
+ o:["In Reception","In June of Year 1, with a retake in Year 2 for pupils who do not meet the standard","At the end of Year 2 only","It is optional"],c:1,
+ e:"The SDP sets targets for both the Year 1 check and Year 2 retakes.",src:"School Development Plan 2025–26"},
+{a:"ach",r:TCH,y:["1","2"],s:"reading",t:"mc",q:"What is the school’s target for the Year 1 phonics screening check?",
+ o:["70% or more","80% or more","90% or more","100%"],c:2,
+ e:"The target is 90% or more, with 75% or more for Year 2 retakes.",src:"School Development Plan 2025–26",loc:true},
+{a:"ach",r:TCH,y:"all",s:"any",t:"cv",q:"The inspector asks: “How do you know your pupils are learning what you teach?”",
+ k:["Regular checks such as questioning and short retrieval tasks","Pupils’ work showing progress over time","Using assessment to plan next steps","Termly pupil progress meetings","Particular attention to disadvantaged pupils and pupils with SEND"],
+ src:"School Development Plan 2025–26"},
+{a:"ach",r:TCH,y:"all",s:"any",t:"mc",q:"Termly pupil progress meetings focus particularly on which pupils?",
+ o:["The highest attainers","Disadvantaged pupils, all vulnerable groups and pupils with SEND","New pupils only","Pupils with poor attendance only"],c:1,
+ e:"English and maths leaders analyse data termly and hold pupil progress meetings with this focus.",src:"School Development Plan 2025–26"},
+{a:"ach",r:CLS,y:"all",s:"any",t:"mc",q:"What does “the lowest 20%” refer to in the School Development Plan?",
+ o:["Pupils with the lowest attendance","Pupils with the lowest attainment, who receive targeted support","Pupils with SEND only","Pupils new to the school"],c:1,
+ e:"The SDP aims to speed up progress for the lowest 20%, pupils with SEND and disadvantaged pupils.",src:"School Development Plan 2025–26"},
+{a:"ach",r:TCH,y:["1","2"],s:"any",t:"mc",q:"What are the school’s end of Key Stage 1 targets?",
+ o:["Reading 75%+, writing 65%+, maths 75%+","Reading 90%+, writing 90%+, maths 90%+","Reading 50%+, writing 50%+, maths 50%+","There are no targets"],c:0,
+ e:"The SDP aims to be above national and in line with Surrey in reading, writing and maths.",src:"School Development Plan 2025–26",loc:true},
+{a:"ach",r:TCH,y:"all",s:"any",t:"cv",q:"The inspector asks: “What is going well in your class this year, and what are you working on?”",
+ k:["A specific strength, with evidence","A specific area to improve, with the reason","What you are doing about it and since when","How you will know it has worked"],
+ src:"Ofsted school inspection toolkit"},
+{a:"ach",r:TCH,y:"all",s:"any",t:"mc",q:"How does the renewed inspection framework grade most evaluation areas?",
+ o:["Exceptional, strong standard, expected standard, needs attention, urgent improvement","Outstanding, good, requires improvement, inadequate","Pass or fail","A single overall grade"],c:0,
+ e:"Each evaluation area receives one of five grades on the report card. Safeguarding is met or not met.",src:"Ofsted school inspection toolkit (renewed framework)"},
+
+/* ---------- ATTENDANCE AND BEHAVIOUR ---------- */
+{a:"att",r:ALL,y:"all",s:"any",t:"mc",q:"What is persistent absence?",
+ o:["Missing 5% or more of sessions","Missing 10% or more of sessions","Missing 20% or more of sessions","Any unauthorised absence"],c:1,
+ e:"Persistent absence means missing 10% or more of possible sessions. Improving it is an SDP target.",src:"DfE attendance guidance; School Development Plan 2025–26"},
+{a:"att",r:TCH,y:"all",s:"any",t:"mc",q:"What is the school’s attendance target?",
+ o:["90%","94%","96%","100%"],c:2,
+ e:"The SDP aims to improve attendance to 96%, supported by half-termly meetings with the Surrey attendance officer.",src:"School Development Plan 2025–26",loc:true},
+{a:"att",r:ALL,y:"all",s:"any",t:"mc",q:"Why does a pupil’s repeated or unexplained absence matter beyond learning?",
+ o:["It does not","It can be a sign of a safeguarding concern, so follow attendance procedures and tell the DSL if worried","It only affects school data","It only matters in Year 2"],c:1,
+ e:"Absence can indicate neglect or other harm. Attendance and safeguarding are closely linked.",src:"KCSIE, Part one"},
+{a:"att",r:TCH,y:"all",s:"any",t:"mc",q:"What happens early on when a pupil’s attendance starts to fall?",
+ o:["Nothing until it reaches 80%","A letter from the headteacher before any formal Stage 1 and Stage 2 letters","An immediate fine","The pupil is removed from roll"],c:1,
+ e:"The SDP describes early headteacher letters to address issues before formal stages.",src:"School Development Plan 2025–26",loc:true},
+{a:"att",r:TCH,y:"all",s:"any",t:"mc",q:"Which guidance became statutory for schools from August 2024?",
+ o:["Working together to improve school attendance","Behaviour in schools","Keeping children safe in education","The EYFS framework"],c:0,
+ e:"It sets out expectations for schools, trusts and local authorities to work together on attendance.",src:"DfE, Working together to improve school attendance"},
+{a:"att",r:ALL,y:"all",s:"any",t:"mc",q:"What does the Positive Behaviour Policy expect of all adults?",
+ o:["Each adult uses their own approach","All adults use the same scripts and routines, in class and at lunchtime","Only teachers manage behaviour","Rules apply in class only"],c:1,
+ e:"Consistency is the aim. Scripts, expectations and Proud Promises are displayed in classes and whole-school areas.",src:"School Development Plan 2025–26",loc:true},
+{a:"att",r:["M","A"],y:"all",s:"any",t:"sc",q:"At lunchtime two children argue over a ball and one becomes very upset. What is the best response?",
+ o:["Take the ball away and walk off","Stay calm, use the school’s behaviour scripts, help the children put things right, and tell the class teacher if there is a pattern","Send both children inside","Ignore it – they will sort it out"],c:1,
+ e:"Lunchtime follows the same Positive Behaviour Policy as the classroom. Patterns should be passed on.",src:"School Development Plan 2025–26",loc:true},
+{a:"att",r:TCH,y:"all",s:"any",t:"sc",q:"A few pupils become fidgety and lose focus during your lesson. What would inspectors expect?",
+ o:["Carry on teaching the rest of the class","Notice quickly and bring pupils back on task using the school’s routines","Send the pupils out","Stop the lesson for everyone"],c:1,
+ e:"The 2022 report noted that a few pupils sometimes lost focus, and that staff usually noticed and got them back on track.",src:"Ofsted report, September 2022"},
+{a:"att",r:CLS,y:"all",s:"any",t:"mc",q:"What is the Zones of Regulation used for?",
+ o:["Seating plans","Helping children recognise and manage their feelings","Playground supervision rotas","Reading levels"],c:1,
+ e:"It is taught in the first week of term, alongside behaviour routines and scripts.",src:"School Development Plan 2025–26"},
+{a:"att",r:ALL,y:"all",s:"any",t:"mc",q:"How does the school reward good behaviour at the end of the week?",
+ o:["Golden Time on Fridays","Merit certificates on Mondays","House points only","It does not"],c:0,
+ e:"Class celebrations through Golden Time take place on Fridays.",src:"School Development Plan 2025–26",loc:true},
+{a:"att",r:ALL,y:"all",s:"any",t:"sc",q:"A pupil tells you another child leaves them out on purpose every day. What should you do?",
+ o:["Say that is just friendships","Listen, take it seriously, record it and act in line with the anti-bullying approach","Tell them to play with someone else","Wait for the parents to raise it"],c:1,
+ e:"In 2022 inspectors noted that leaders treat concerns about bullying very seriously and act quickly.",src:"Ofsted report, September 2022",loc:true},
+{a:"att",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “How does the school help pupils behave well, and what do you do when they don’t?”",
+ k:["The Positive Behaviour Policy and its scripts and routines","Proud Promises and classroom charters","Zones of Regulation","Consistency between adults, including at lunchtime","A trauma-informed approach from SAATIS training"],
+ src:"School Development Plan 2025–26"},
+{a:"att",r:ALL,y:"all",s:"any",t:"mc",q:"Can school staff use reasonable force to stop a child hurting themselves or others?",
+ o:["Never","Yes – all school staff have a legal power to use reasonable force in these circumstances, and incidents must be recorded and reported","Only the headteacher","Only with parental permission on the day"],c:1,
+ e:"Force must be reasonable and proportionate, and the school’s procedures for recording and informing parents must be followed.",src:"DfE, Use of reasonable force in schools",loc:true},
+{a:"att",r:ALL,y:"all",s:"any",t:"sc",q:"At lunchtime a child uses a racist word towards another child. What should you do?",
+ o:["Ignore it – they do not understand","Challenge it calmly, support the child targeted, and record and report it in line with school policy","Make the child apologise and take no further action","Tell them off in front of everyone"],c:1,
+ e:"Prejudice-related incidents are recorded so patterns can be spotted and addressed through teaching.",src:"School behaviour and equality policies",loc:true},
+{a:"att",r:ALL,y:"all",s:"any",t:"mc",q:"Which kind of praise has the most impact on behaviour?",
+ o:["Specific praise that names the behaviour, such as “Thank you for waiting your turn”","General praise such as “Good boy”","Praise only for the most improved child","No praise, so children stay humble"],c:0,
+ e:"Specific praise tells children exactly what to repeat and fits the school’s positive behaviour approach.",src:"School Development Plan 2025–26 (Positive Behaviour Policy)"},
+{a:"att",r:["M","A"],y:"all",s:"any",t:"sc",q:"A child who is usually settled becomes very distressed and starts throwing things in the playground. What do you do first?",
+ o:["Shout to stop them","Keep yourself and others safe, stay calm, use few words and a quiet voice, and call for support","Take the child’s shoes away","Leave them to calm down alone"],c:1,
+ e:"Co-regulation comes before discussion. Follow any individual plan the child has, and record the incident afterwards.",src:"School behaviour policy; SAATIS approach",loc:true},
+{a:"att",r:["LEAD"],y:"all",s:"any",t:"cv",q:"The inspector asks a leader: “How consistent is behaviour management across the school, and how do you know?”",
+ k:["SLT learning walks, drop-ins and observations","Scripts and expectations displayed and used in every class","Pupil and parent views","Behaviour records and patterns","What you do when you find inconsistency"],
+ src:"School Development Plan 2025–26"},
+
+/* ---------- PERSONAL DEVELOPMENT AND WELLBEING ---------- */
+{a:"pd",r:ALL,y:"all",s:"any",t:"mc",q:"Which list gives the fundamental British values?",
+ o:["Democracy, the rule of law, individual liberty, and mutual respect and tolerance of those with different faiths and beliefs","Honesty, kindness, fairness and hard work","Democracy, the monarchy, the flag and the law","Respect, resilience, reading and responsibility"],c:0,
+ e:"British values are taught in the first week of term and through PSHE and assemblies.",src:"School British Values page; School Development Plan 2025–26"},
+{a:"pd",r:ALL,y:"all",s:"any",t:"mc",q:"How do pupils have a say in school life?",
+ o:["They do not","Through the School Council and pupil voice activities","Only through parents","Only in Year 2"],c:1,
+ e:"The School Council is part of the school’s aim for pupils to be responsible citizens.",src:"School Development Plan 2025–26"},
+{a:"pd",r:TCH,y:"all",s:"any",t:"mc",q:"How does the school plan to help pupils engage with views and beliefs different from their own?",
+ o:["It does not","Assemblies with speakers from a range of faiths","Only through RE lessons","Through homework"],c:1,
+ e:"The SDP includes increasing assembly diversity through speakers from all faiths.",src:"School Development Plan 2025–26"},
+{a:"pd",r:ALL,y:"all",s:"any",t:"mc",q:"Which of these does the school offer to support anxious children?",
+ o:["ELSA sessions and therapy dog sessions","Extra homework","Moving class","No specific support"],c:0,
+ e:"The SDP includes ELSA support and weekly therapy dog sessions for small groups of children.",src:"School Development Plan 2025–26",loc:true},
+{a:"pd",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “How does the school help pupils become responsible citizens?”",
+ k:["Heart of the Community awards and STEP badges","School Council and Eco-school","Visits to local residences for older people","Enrichment weeks, such as Feeling Good Week","Forest sessions and supported risk-taking"],
+ src:"School Development Plan 2025–26"},
+{a:"pd",r:["M","A"],y:"all",s:"any",t:"mc",q:"Inspectors often talk to pupils at lunchtime. What did the 2022 report say about lunchtimes?",
+ o:["They were chaotic","They were sociable; pupils played kindly and helped adults","Pupils ate alone","Lunch was too short"],c:1,
+ e:"Midday staff help keep lunchtimes calm, kind and sociable.",src:"Ofsted report, September 2022"},
+{a:"pd",r:ALL,y:"all",s:"any",t:"sc",q:"At lunch a child with a known allergy starts to have swollen lips and difficulty breathing. What should you do?",
+ o:["Give them a drink of water and watch","Stay with the child, call for a first aider, follow their care plan including the adrenaline auto-injector if prescribed, and call 999","Send them to the office on their own","Call the parent first and wait"],c:1,
+ e:"Anaphylaxis is an emergency. Know which children have care plans and where their medication is kept.",src:"DfE, Supporting pupils with medical conditions; school medical procedures",loc:true},
+{a:"pd",r:["M","A"],y:"all",s:"any",t:"mc",q:"How do you know which children have food allergies at lunchtime?",
+ o:["Ask the children","Use the school’s system, such as allergy lists or photo cards, and check before food is served","Guess from what they bring","The kitchen deals with it, so you do not need to know"],c:1,
+ e:"Every adult supervising food should know the children at risk and the system for checking.",src:"School medical and catering procedures",loc:true},
+{a:"pd",r:ALL,y:"all",s:"any",t:"sc",q:"A child bumps their head on the climbing frame. They seem fine. What should you do?",
+ o:["Nothing – they seem fine","Give first aid, record it, make sure parents are informed in line with policy, and watch for any change","Send them back to play and tell nobody","Wait until they complain"],c:1,
+ e:"Head injuries must be recorded and reported, because symptoms can appear later.",src:"School first aid policy",loc:true},
+{a:"pd",r:["M"],y:"all",s:"any",t:"sc",q:"You notice the same child sitting alone at lunchtime most days, looking worried. What do you do?",
+ o:["Leave them – some children prefer it","Check in kindly, help them join an activity if they want to, and let the class teacher know what you have noticed","Make them join a game","Tell other children to play with them"],c:1,
+ e:"Midday staff often see things teachers do not. Sharing small observations helps the school support wellbeing early.",src:"School Development Plan 2025–26 (early recognition of wellbeing needs)"},
+{a:"pd",r:["M","A"],y:["R"],s:"any",t:"sc",q:"A Reception child has a toileting accident. What should you do?",
+ o:["Tell them off so it does not happen again","Reassure them, follow the intimate care procedure to protect their dignity, and record it","Ask another child to help","Call the parent to collect them straight away"],c:1,
+ e:"Intimate care must follow the school procedure, which protects both the child and the adult.",src:"School intimate care procedure",loc:true},
+{a:"pd",r:ALL,y:"all",s:"any",t:"mc",q:"What is Feeling Good Week?",
+ o:["A sports competition","One of the school’s enrichment weeks focusing on wellbeing","A reading challenge","A parent open week"],c:1,
+ e:"The SDP plans special weeks including Book Week, Feeling Good Week, Future Selves Week and Enrichment Week.",src:"School Development Plan 2025–26"},
+{a:"pd",r:CLS,y:"all",s:"any",t:"cv",q:"The inspector asks: “How do pupils learn about people who are different from them?”",
+ k:["Jigsaw Celebrating Difference","RE and assemblies with speakers from different faiths","Books and stories that show a range of families and cultures","British values, especially mutual respect and tolerance","How staff respond to unkind or prejudiced comments"],
+ src:"School Development Plan 2025–26"},
+{a:"pd",r:TCH,y:"all",s:"any",t:"mc",q:"What does SMSC stand for?",
+ o:["Spiritual, moral, social and cultural development","Special, medical, social and care needs","School management and safeguarding checks","Sport, music, science and computing"],c:0,
+ e:"SMSC development runs through the curriculum, assemblies and wider school life.",src:"School curriculum page"},
+
+/* ---------- EARLY YEARS ---------- */
+{a:"ey",r:CLS,y:["R"],s:"any",t:"mc",q:"What are the three prime areas of the EYFS?",
+ o:["Literacy, mathematics and understanding the world","Communication and language; personal, social and emotional development; physical development","Reading, writing and number","Expressive arts, literacy and PSED"],c:1,
+ e:"The prime areas underpin all later learning. There are four specific areas as well.",src:"EYFS statutory framework"},
+{a:"ey",r:CLS,y:["R"],s:"any",t:"mc",q:"Which of these is one of the four specific areas of the EYFS?",
+ o:["Understanding the world","Physical development","Communication and language","Personal, social and emotional development"],c:0,
+ e:"The specific areas are literacy, mathematics, understanding the world, and expressive arts and design.",src:"EYFS statutory framework"},
+{a:"ey",r:TCH,y:["R"],s:"any",t:"mc",q:"What does a “good level of development” (GLD) mean?",
+ o:["Meeting all early learning goals","Meeting the expected level in the early learning goals in the prime areas plus literacy and mathematics","Passing the Reception Baseline","Being ready to read"],c:1,
+ e:"The school’s target is GLD of 85% or more.",src:"EYFS statutory framework; School Development Plan 2025–26"},
+{a:"ey",r:TCH,y:["R"],s:"any",t:"mc",q:"When is the Reception Baseline Assessment carried out?",
+ o:["Before children start","Within the first six weeks of Reception","At Christmas","In the summer term"],c:1,
+ e:"It is a short statutory check of early maths, literacy, communication and language.",src:"DfE Reception Baseline Assessment guidance"},
+{a:"ey",r:CLS,y:["R"],s:"any",t:"mc",q:"What does the EYFS require about a key person?",
+ o:["Only for children with SEND","Each child must be assigned a key person","Only for nursery settings","It is optional"],c:1,
+ e:"The key person helps the child feel secure and builds a relationship with parents.",src:"EYFS statutory framework"},
+{a:"ey",r:CLS,y:["R"],s:"any",t:"mc",q:"What is NELI?",
+ o:["A phonics scheme","The Nuffield Early Language Intervention, which develops oral language","A maths programme","An attendance tool"],c:1,
+ e:"The SDP includes NELI to improve GLD outcomes, alongside speech and language support.",src:"School Development Plan 2025–26"},
+{a:"ey",r:TCH,y:["R"],s:"any",t:"mc",q:"When is the EYFS profile completed?",
+ o:["In the first term","In the final term of Reception","In Year 1","Only for children below expectations"],c:1,
+ e:"The profile summarises each child’s attainment against the early learning goals.",src:"EYFS statutory framework"},
+{a:"ey",r:TCH,y:["R"],s:"any",t:"cv",q:"The inspector asks: “How does your Reception curriculum prepare children for Year 1?”",
+ k:["Communication and language, including planned vocabulary","Phonics from the start, following Little Wandle","Early maths","Routines and personal, social and emotional development","Transition arrangements with Year 1 teachers"],
+ src:"EYFS statutory framework; School Development Plan 2025–26"},
+{a:"ey",r:["A"],y:["R"],s:"any",t:"cv",q:"The inspector asks: “How do you use your conversations with children to develop their language?”",
+ k:["Model new words during play","Ask open questions and give time to answer","Extend what the child says","Support children with speech and language needs using agreed strategies","Share observations with the teacher"],
+ src:"Ofsted report, September 2022; School Development Plan 2025–26"},
+{a:"ey",r:CLS,y:["R"],s:"any",t:"mc",q:"What does the EYFS require about paediatric first aid?",
+ o:["Nothing for school Reception classes","At least one person with a current paediatric first aid certificate must be on the premises and available when children are present, and on outings","Only the teacher needs training","Parents provide first aid"],c:1,
+ e:"Check who holds paediatric first aid certificates in Reception.",src:"EYFS statutory framework",loc:true},
+{a:"ey",r:CLS,y:["R"],s:"any",t:"mc",q:"What are the three sections of requirements in the EYFS statutory framework?",
+ o:["Learning and development; assessment; safeguarding and welfare","Reading; writing; maths","Planning; marking; reporting","Intent; implementation; impact"],c:0,
+ e:"Inspectors of early years look at all three.",src:"EYFS statutory framework"},
+{a:"ey",r:TCH,y:["R"],s:"any",t:"sc",q:"A Reception child’s language is well below what you would expect. What should happen?",
+ o:["Wait until Year 1","Identify it early, use targeted support such as NELI, involve parents and raise it with the SENCO","Focus only on phonics","Keep them in the book corner"],c:1,
+ e:"The SDP prioritises language, with speech and language and educational psychology support in EYFS.",src:"School Development Plan 2025–26"},
+{a:"ey",r:CLS,y:["R"],s:"any",t:"cv",q:"The inspector asks: “How do you use play to help children learn?”",
+ k:["Planned purposeful play linked to curriculum goals","Adults interacting to extend thinking and vocabulary","Balance of adult-led and child-initiated learning","Indoor and outdoor provision","How you check what children have learned"],
+ src:"EYFS statutory framework; Ofsted report, September 2022"},
+
+/* ---------- SUBJECT LEADERSHIP (all leaders) ---------- */
+{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"What does the school expect subject leaders to monitor?",
+ o:["Only planning","Policy, CPD, planning and work scrutiny, displays, pupil voice and assessment","Only test results","Nothing – SLT does this"],c:1,
+ e:"Subject leaders monitor half-termly and complete a termly monitoring form.",src:"School Development Plan 2025–26",loc:true},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"Who does a subject leader meet to review their subject?",
+ o:["The subject governor","The local authority adviser only","Parents","Nobody"],c:0,
+ e:"Subject leaders meet their subject governor and produce a yearly report for governors.",src:"School Development Plan 2025–26",loc:true},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"How often is a staff meeting devoted to subject leadership?",
+ o:["Once a year","Once every half term","Every week","Never"],c:1,
+ e:"The SDP plans one staff meeting every half term for subject leadership, with an agenda completed by every subject leader.",src:"School Development Plan 2025–26",loc:true},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"What should the yearly subject report to governors cover?",
+ o:["Coverage, skills, resourcing and training","Only test results","Only the budget","Staff absence"],c:0,
+ e:"A standard proforma is used so governors can compare subjects.",src:"School Development Plan 2025–26",loc:true},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"Which is the strongest evidence that your subject curriculum is working?",
+ o:["All units have been covered","Pupils can talk about and show what they know and remember, and their work shows progress","Displays look attractive","Planning is complete"],c:1,
+ e:"Inspectors focus on what pupils know and remember, not only on coverage.",src:"Ofsted school inspection toolkit"},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"sc",q:"Monitoring shows one class is not following the planned sequence in your subject. What do you do?",
+ o:["Report the teacher to the headteacher straight away","Talk with the teacher to understand why, agree support or CPD, and check again later","Ignore it – teachers know best","Rewrite the curriculum"],c:1,
+ e:"Support first, then follow up. Keep a record of actions and impact.",src:"School Development Plan 2025–26 (subject leader accountability)"},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"cv",q:"The inspector asks: “What are the strengths and weaknesses in your subject, and what are you doing about them?”",
+ k:["A specific strength with evidence","A specific weakness with evidence","The actions you have taken and when","The impact so far","What happens next"],
+ src:"Ofsted school inspection toolkit"},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"cv",q:"The inspector asks: “How do you know your subject is taught well in every class, including the mixed-age classes?”",
+ k:["Monitoring activities: book looks, drop-ins, pupil voice","Checking the Year A / Year B planning for progression","Talking with teachers about their subject knowledge","Comparing outcomes across classes","Following up where there are differences"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"cv",q:"The inspector asks: “How have you developed staff subject knowledge?”",
+ k:["Link to the 2022 area for improvement","Training you have led or arranged","How you identified the training needs","How practice has changed as a result","How you support new staff and ECTs"],
+ src:"Ofsted report, September 2022; School Development Plan 2025–26"},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"cv",q:"The inspector asks: “Why is your curriculum sequenced in this order?”",
+ k:["What pupils need to know first","How knowledge builds from Reception to Year 2","Key vocabulary and concepts that recur","How the two-year rolling cycle keeps progression","What pupils need for junior school"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"Where do the School Development Plan priorities come from?",
+ o:["School self-evaluation and the September 2022 Ofsted report","Local authority instructions only","Parent surveys only","A national template"],c:0,
+ e:"Leaders should be able to explain how their subject plan links to these priorities.",src:"School Development Plan 2025–26"},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"What did the School Development Plan ask staff and governors to do to prepare for the renewed framework?",
+ o:["Read the inspection framework and school inspection toolkit, with CPD on each evaluation area","Nothing","Only read the previous report","Write new policies"],c:0,
+ e:"The headteacher also planned to prepare a report on the new report card.",src:"School Development Plan 2025–26"},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"cv",q:"The inspector asks: “What do pupils say about your subject?”",
+ k:["What pupil voice monitoring shows","What pupils enjoy and what they find hard","Whether pupils can recall key knowledge","What you changed as a result of pupil views"],
+ src:"School Development Plan 2025–26 (pupil voice)"},
+
+/* ---------- PSHE LEAD ---------- */
+{a:"lead",r:["P"],y:"all",s:"pshe",t:"mc",q:"Which parts of RSHE are statutory in primary schools?",
+ o:["Relationships education and health education","Sex education only","None – it is all optional","Relationships education only"],c:0,
+ e:"Sex education is not compulsory in primary schools beyond the science curriculum.",src:"DfE RSHE statutory guidance"},
+{a:"lead",r:["P"],y:"all",s:"pshe",t:"mc",q:"In a primary school, what can parents withdraw their child from?",
+ o:["Relationships education","Health education","Sex education that goes beyond the science curriculum","All PSHE"],c:2,
+ e:"Parents cannot withdraw from relationships education or health education in primary schools.",src:"DfE RSHE statutory guidance"},
+{a:"lead",r:["P"],y:"all",s:"pshe",t:"mc",q:"What must the school do when developing its relationships education policy?",
+ o:["Consult parents","Nothing – it is internal","Get local authority approval","Ask pupils to vote"],c:0,
+ e:"Schools must consult parents when developing and reviewing the policy and publish it on the website.",src:"DfE RSHE statutory guidance",loc:true},
+{a:"lead",r:["P"],y:"all",s:"pshe",t:"mc",q:"Which of these is part of statutory health education in primary schools?",
+ o:["Mental wellbeing, internet safety and harms, and basic first aid","Driving theory","Financial investments","Career planning"],c:0,
+ e:"Health education also covers physical health and fitness, healthy eating, and health and prevention.",src:"DfE RSHE statutory guidance"},
+{a:"lead",r:["P"],y:"all",s:"pshe",t:"mc",q:"Which Jigsaw Puzzle is usually taught first in the autumn term?",
+ o:["Being Me in My World","Changing Me","Healthy Me","Relationships"],c:0,
+ e:"Being Me in My World sets class charters and expectations, which links to the school’s classroom charters.",src:"Jigsaw PSHE programme; School Development Plan 2025–26",loc:true},
+{a:"lead",r:["P"],y:"all",s:"pshe",t:"cv",q:"The inspector asks the PSHE lead: “How does PSHE help keep pupils safe?”",
+ k:["The safeguarding curriculum and first-week teaching on trusted adults","Age-appropriate relationships education, including personal boundaries","Online safety","How PSHE links with the DSL’s knowledge of local risks","How staff respond to disclosures in PSHE lessons"],
+ src:"School safeguarding curriculum; KCSIE; DfE RSHE guidance"},
+{a:"lead",r:["P"],y:"all",s:"pshe",t:"cv",q:"The inspector asks the PSHE lead: “How do you know pupils have learned what is taught in PSHE?”",
+ k:["Jigsaw assessment and teacher observations","Pupil voice – pupils can explain key ideas","Floor books or class records","How you adapt teaching where pupils have gaps"],
+ src:"Jigsaw PSHE programme",loc:true},
+{a:"lead",r:["P"],y:"all",s:"pshe",t:"cv",q:"The inspector asks the PSHE lead: “How does PSHE support pupils’ personal development and wellbeing?”",
+ k:["Jigsaw Puzzles such as Healthy Me and Celebrating Difference","Zones of Regulation and emotional vocabulary","Links to ELSA and the therapy dog programme","Feeling Good Week and enrichment","British values and the School Council"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["P"],y:"all",s:"pshe",t:"cv",q:"The inspector asks the PSHE lead: “How do you make sure PSHE is taught well in every class?”",
+ k:["Monitoring: drop-ins, floor books, pupil voice","Staff training on Jigsaw and sensitive topics","Consistent timetabling","Support for less confident staff"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["P"],y:"all",s:"pshe",t:"sc",q:"A parent objects to a Changing Me lesson. What should the PSHE lead do?",
+ o:["Excuse the child from all PSHE","Meet the parent, share the content and resources, explain what is statutory, and explain the right to withdraw from sex education only","Refuse to discuss it","Cancel the lesson for everyone"],c:1,
+ e:"Transparency builds trust. Parents can see materials and understand what is statutory.",src:"DfE RSHE statutory guidance"},
+
+/* ---------- ENGLISH AND PHONICS LEAD ---------- */
+{a:"lead",r:["L"],y:"all",s:"reading",t:"mc",q:"How often does the school plan phonics observations?",
+ o:["Once a year","Each half term","Never","Only when Ofsted is due"],c:1,
+ e:"The SDP includes phonics observations each half term and English observations once a term.",src:"School Development Plan 2025–26",loc:true},
+{a:"lead",r:["L"],y:"all",s:"reading",t:"cv",q:"The inspector asks the English lead: “How do you make sure phonics is taught consistently in every class?”",
+ k:["Little Wandle refresher training for all staff","Half-termly phonics observations","Same resources, routines and sequence in every class","Keep-up sessions checked for quality","Coaching for anyone less secure"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["L"],y:"all",s:"reading",t:"cv",q:"The inspector asks the English lead: “What happens for pupils who do not meet the standard in the Year 1 phonics check?”",
+ k:["They continue with phonics teaching in Year 2","Targeted support and Keep-up","Books matched to their phonics stage","Regular assessment","The Year 2 retake target of 75% or more"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["L"],y:"all",s:"reading",t:"sc",q:"During monitoring you find a child reading a book with many sounds they have not been taught. What do you do?",
+ o:["Leave it – it is good challenge","Replace it with a book matched to their phonics stage and check how books are allocated in that class","Remove all reading books","Ask parents to help more"],c:1,
+ e:"Books must match the phonics stage exactly. Check the system, not just the one book.",src:"School Development Plan 2025–26"},
+{a:"lead",r:["L"],y:"all",s:"writing",t:"mc",q:"What is the school’s end of Key Stage 1 writing target?",
+ o:["50% or more","65% or more","80% or more","90% or more"],c:1,
+ e:"Reading and maths targets are 75% or more.",src:"School Development Plan 2025–26",loc:true},
+{a:"lead",r:["L"],y:"all",s:"writing",t:"cv",q:"The inspector asks the English lead: “How has the writing curriculum been planned for mixed-age classes?”",
+ k:["Replanned with new texts for Year 1 and Year 2 together","Clear year-group expectations within each unit","Progression in transcription and composition","Cross-moderation with partner schools each term"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["L"],y:"all",s:"reading",t:"cv",q:"The inspector asks the English lead: “How do you promote a love of reading?”",
+ k:["Daily 20-minute story time","SWAP boxes, bedtime book bags and library visits","Book Week, authors and storytellers","Reading volunteers","Information for parents on reading at home"],
+ src:"School Development Plan 2025–26"},
+
+/* ---------- MATHS LEAD ---------- */
+{a:"lead",r:["N"],y:"all",s:"maths",t:"mc",q:"What is the school’s end of Key Stage 1 maths target?",
+ o:["60% or more","75% or more","85% or more","95% or more"],c:1,
+ e:"The target is 75% or more, in line with Surrey and above national.",src:"School Development Plan 2025–26",loc:true},
+{a:"lead",r:["N"],y:"all",s:"maths",t:"mc",q:"How often are maths interventions reviewed?",
+ o:["Every six weeks","Once a year","Never","Only at the end of Year 2"],c:0,
+ e:"Six-weekly reviews make sure each intervention is having an impact.",src:"School Development Plan 2025–26"},
+{a:"lead",r:["N"],y:"all",s:"maths",t:"cv",q:"The inspector asks the maths lead: “Why is maths taught in year groups when classes are mixed-age?”",
+ k:["Guidance from the Surrey Maths Hub","Maths is highly sequential, so year-group teaching keeps the order secure","How this is organised in practice","How you check the impact"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["N"],y:"all",s:"maths",t:"cv",q:"The inspector asks the maths lead: “How does number sense build from Reception to Year 2?”",
+ k:["Early number and subitising in Reception","Number bonds and place value in Year 1","Fluency in facts and times tables in Year 2","Use of concrete, pictorial and abstract representations","How you check pupils are secure before moving on"],
+ src:"EYFS framework; National Curriculum; Maths Hub guidance"},
+{a:"lead",r:["N"],y:"all",s:"maths",t:"cv",q:"The inspector asks the maths lead: “How well do disadvantaged pupils and pupils with SEND do in maths?”",
+ k:["What the data shows compared with all pupils","Pupil progress meeting findings","Interventions and their impact","How lessons are adapted","What you are doing next"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["N"],y:"all",s:"maths",t:"mc",q:"How does the school check maths assessment is accurate?",
+ o:["Termly cross-moderation with partner (RLP) schools","It does not","Only through the Year 2 tests","Parents check it"],c:0,
+ e:"Cross-moderation takes place once a term for writing, maths and reading.",src:"School Development Plan 2025–26",loc:true},
+
+/* ---------- EYFS LEAD ---------- */
+{a:"lead",r:["Y"],y:["R"],s:"any",t:"mc",q:"What is the school’s GLD target?",
+ o:["70% or more","85% or more","95% or more","There is no target"],c:1,
+ e:"Leaders plan to reach it through a focus on language, including NELI.",src:"School Development Plan 2025–26",loc:true},
+{a:"lead",r:["Y"],y:["R"],s:"any",t:"cv",q:"The inspector asks the EYFS lead: “How is your curriculum sequenced across the Reception year?”",
+ k:["What children learn in each term, and why in that order","Priority on communication and language","Phonics and early maths from the start","How the curriculum meets the early learning goals","How it links to Year 1 learning"],
+ src:"EYFS statutory framework"},
+{a:"lead",r:["Y"],y:["R"],s:"any",t:"cv",q:"The inspector asks the EYFS lead: “How are you improving children’s language and communication?”",
+ k:["NELI for children who need it","Speech and language and educational psychology support","Sharing specialist advice across the EYFS team","Planned vocabulary and quality adult interactions","Measuring impact"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["Y"],y:["R"],s:"any",t:"cv",q:"The inspector asks the EYFS lead: “How do you meet the EYFS safeguarding and welfare requirements?”",
+ k:["Key person for every child","Paediatric first aid cover","Mobile phone and camera policy","Safe environment and risk assessments","Staff training and supervision"],
+ src:"EYFS statutory framework",loc:true},
+{a:"lead",r:["Y"],y:["R"],s:"any",t:"mc",q:"How is Reception reported on the renewed report card?",
+ o:["As a separate early years evaluation area","It is not inspected","Only within curriculum and teaching","Only within safeguarding"],c:0,
+ e:"Schools with Reception classes receive a separate early years grade.",src:"Ofsted school inspection toolkit (renewed framework)"},
+{a:"lead",r:["Y"],y:["R"],s:"any",t:"cv",q:"The inspector asks the EYFS lead: “How do you work with parents?”",
+ k:["Welcome meetings and information for new parents","Sharing phonics and reading approaches","Regular communication about progress","Involving parents early when there are concerns"],
+ src:"School website; School Development Plan 2025–26"},
+
+/* ---------- OTHER SUBJECT LEADERS ---------- */
+{a:"lead",r:["S"],y:"all",s:"any",t:"cv",q:"The inspector asks: “What are the most important things pupils should remember from your subject by the end of Year 2?”",
+ k:["The core knowledge and vocabulary","The key skills","How these build on Reception","How you know pupils remember them"],
+ src:"National Curriculum"},
+{a:"lead",r:["S"],y:"all",s:"any",t:"cv",q:"The inspector asks: “How do trips, visitors and enrichment support your subject?”",
+ k:["Specific examples, such as forest sessions or theme days","How each links to curriculum content","How all pupils can take part, including disadvantaged pupils","How learning is followed up in class"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["S"],y:"all",s:"any",t:"mc",q:"What was one audit task for subject leaders when foundation planning was rewritten?",
+ o:["Checking skills progression and coverage in the Year A / Year B plans","Counting worksheets","Choosing display colours","Timing lessons"],c:0,
+ e:"External feedback was also sought on the new curriculum.",src:"School Development Plan 2025–26"}
+];
+
+/* ================= helpers ================= */
+const $ = s => document.querySelector(s);
+function hash(str){ let h=5381; for(let i=0;i<str.length;i++){h=((h<<5)+h+str.charCodeAt(i))|0;} return "q"+(h>>>0).toString(36); }
+Q.forEach(q=>q.id=hash(q.q));
+function shuffle(a){ for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
+function store(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){} }
+function load(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } }
+
+/* ================= state ================= */
+let state = {role:"T", year:"all", subject:"any", areas:new Set(), quiz:[], i:0, results:[]};
+const seenKey = () => "tg-seen-"+state.role;
+function getSeen(){ return new Set(load(seenKey(),[])); }
+function addSeen(id){ const s=getSeen(); s.add(id); store(seenKey(),[...s]); }
+
+/* ================= setup rendering ================= */
+function renderRoles(){
+  const staff=$("#rolesStaff"), lead=$("#rolesLead"); staff.innerHTML=""; lead.innerHTML="";
+  Object.entries(ROLES).forEach(([k,r])=>{
+    const d=document.createElement("div"); d.className="role";
+    d.innerHTML=`<input type="radio" name="role" id="r-${k}" value="${k}" ${k===state.role?"checked":""}><label for="r-${k}"><b>${r.name}</b><small>${r.desc}</small></label>`;
+    d.querySelector("input").addEventListener("change",()=>selectRole(k));
+    (r.group==="lead"?lead:staff).appendChild(d);
+  });
+}
+function selectRole(k){
+  state.role=k; const r=ROLES[k];
+  state.subject = r.subject || "any"; $("#subject").value=state.subject;
+  if (r.year){ state.year=r.year; document.querySelector(`input[name="year"][value="${r.year}"]`).checked=true; }
+  state.areas.clear(); renderAreas();
+}
+function relevantAreas(){
+  let list = ROLES[state.role].areas.slice();
+  if (state.year!=="all" && state.year!=="R") list = list.filter(a=>a!=="ey");
+  return list;
+}
+function renderAreas(){
+  const box=$("#areas"); box.innerHTML="";
+  const list=relevantAreas();
+  if (state.areas.size===0) list.forEach(a=>state.areas.add(a));
+  [...state.areas].forEach(a=>{ if(!list.includes(a)) state.areas.delete(a); });
+  state.areas.add("safe");
+  list.forEach(a=>{
+    const locked=a==="safe", on=state.areas.has(a);
+    const d=document.createElement("div"); d.className="area";
+    d.innerHTML=`<input type="checkbox" id="ar-${a}" value="${a}" ${on?"checked":""} ${locked?"disabled":""}>
+      <label for="ar-${a}"><span class="box">${CHECK_SVG}</span><span class="name">${AREAS[a]}</span><span class="state">${locked?"Always included":on?"Included":"Not included"}</span></label>`;
+    d.querySelector("input").addEventListener("change",e=>{
+      e.target.checked?state.areas.add(a):state.areas.delete(a);
+      d.querySelector(".state").textContent = e.target.checked?"Included":"Not included";
+      updateCount();
+    });
+    box.appendChild(d);
+  });
+  $("#subjectSet").classList.toggle("hidden", state.role==="M");
+  $("#areaStep").textContent = state.role==="M" ? "3" : "4";
+  if (state.role==="M"){ state.subject="any"; $("#subject").value="any"; }
+  updateCount();
+}
+function roleMatches(q){ const tags=ROLES[state.role].tags; return q.r.some(t=>tags.includes(t)); }
+function yearMatches(q){ return state.year==="all" || q.y==="all" || q.y.includes(state.year); }
+function rolePool(){ return Q.filter(q=>roleMatches(q) && yearMatches(q)); }
+function pool(){
+  return rolePool().filter(q=> state.areas.has(q.a) && (state.subject==="any" || q.s==="any" || q.s===state.subject));
+}
+function bankHTML(){
+  const all=rolePool(), seen=getSeen(); const n=all.filter(q=>seen.has(q.id)).length;
+  const pct = all.length? Math.round(n/all.length*100):0;
+  const quizzes = Math.floor(all.length/QUIZ_LEN);
+  return `<div class="line"><strong>Your progress through the ${ROLES[state.role].name.toLowerCase()} question set</strong><span>${n} of ${all.length} seen</span></div>
+    <div class="meter" role="progressbar" aria-valuemin="0" aria-valuemax="100" aria-valuenow="${pct}" aria-label="Question set progress"><b style="width:${pct}%"></b></div>
+    <div class="line" style="margin:.5rem 0 0"><span class="count">Enough for about ${quizzes} quizzes without repeats (${YEAR_NAMES[state.year].toLowerCase()}).</span>${n?'<button class="linkbtn" id="resetSeen">Start the set again</button>':''}</div>`;
+}
+function updateCount(){
+  const n=pool().length;
+  $("#poolCount").textContent = n ? `${n} questions match your choices` : "No questions match. Tick more areas.";
+  $("#startBtn").disabled = n===0;
+  $("#bank").innerHTML = bankHTML();
+  const r=$("#resetSeen"); if(r) r.onclick=()=>{ store(seenKey(),[]); updateCount(); };
+}
+
+/* ================= quiz building (random, unseen first) ================= */
+function take(list, n, used, seen){
+  const avail = list.filter(q=>!used.has(q.id));
+  const fresh = shuffle(avail.filter(q=>!seen.has(q.id)));
+  const old = shuffle(avail.filter(q=>seen.has(q.id)));
+  const out = fresh.concat(old).slice(0,n);
+  out.forEach(q=>used.add(q.id));
+  return out;
+}
+function buildQuiz(){
+  const p=pool(); let seen=getSeen();
+  if (p.every(q=>seen.has(q.id))){ store(seenKey(),[]); seen=new Set(); }
+  const used=new Set(), picked=[];
+  const onlySafe = state.areas.size===1;
+  picked.push(...take(p.filter(q=>q.a==="safe"), onlySafe?QUIZ_LEN:3, used, seen));
+  if (state.areas.has("lead")) picked.push(...take(p.filter(q=>q.a==="lead"),3,used,seen));
+  if (state.subject!=="any") picked.push(...take(p.filter(q=>q.s===state.subject),3,used,seen));
+  picked.push(...take(p, QUIZ_LEN-picked.length, used, seen));
+  return shuffle(picked.slice(0,QUIZ_LEN)).map(q=>{
+    if (q.o){ const order=shuffle(q.o.map((_,k)=>k)); return {...q, order}; }
+    return {...q};
+  });
+}
+
+/* ================= screens ================= */
+function show(id){
+  ["setup","quiz","results"].forEach(s=>$("#"+s).classList.toggle("hidden", s!==id));
+  $("#quitBtn").classList.toggle("hidden", id==="setup");
+  $("#confirmQuit").classList.add("hidden");
+  window.scrollTo(0,0);
+}
+function goHome(){ show("setup"); updateCount(); }
+function start(){
+  state.quiz=buildQuiz(); state.i=0; state.results=[];
+  show("quiz"); showQ();
+}
+function renderProgress(){
+  const n=state.quiz.length;
+  $("#qCount").textContent = `Question ${state.i+1} of ${n}`;
+  const score = state.results.reduce((s,r)=>s+r.v,0);
+  $("#qScore").textContent = state.results.length ? `Score so far: ${score} of ${state.results.length}` : "";
+  $("#progress").innerHTML = state.quiz.map((_,k)=>{
+    const r=state.results[k];
+    const cls = r ? (r.v===1?"ok":r.v===0?"no":"part") : (k===state.i?"now":"");
+    return `<i class="${cls}"></i>`;
+  }).join("");
+}
+function showQ(){
+  const q=state.quiz[state.i];
+  renderProgress();
+  $("#meta").innerHTML = `<span class="pill">${AREAS[q.a]}</span><span class="pill type">${TYPE_NAMES[q.t]}</span>`;
+  const card=$("#card"); $("#nextBtn").classList.add("hidden");
+  const localNote = q.loc ? '<span class="local">Check locally – confirm details with the senior leadership team</span>' : '';
+  if (q.t==="cv"){
+    card.innerHTML = `<p class="question">${q.q}</p>
+      <label for="ans" class="hint" style="display:block;margin:0 0 .4rem">Write or say your answer, then compare it with the key points.</label>
+      <textarea id="ans"></textarea>
+      <div style="margin-top:.9rem"><button class="btn ghost" id="showKeys">Show key points</button></div>
+      <div id="keysBox"></div>`;
+    $("#showKeys").onclick=()=>{
+      $("#showKeys").remove();
+      $("#keysBox").innerHTML = `<div class="feedback"><div class="verdict">A strong answer would cover:</div>
+        <ul class="keys">${q.k.map(x=>`<li>${x}</li>`).join("")}</ul>
+        <p class="source">Source: ${q.src}</p>${localNote}
+        <p style="margin:1rem 0 .5rem;font-weight:700">How much did your answer cover?</p>
+        <div class="rate"><button class="opt" data-v="1">Most points</button><button class="opt" data-v="0.5">Some points</button><button class="opt" data-v="0">Few points</button></div></div>`;
+      document.querySelectorAll(".rate .opt").forEach(b=>b.onclick=()=>{
+        document.querySelectorAll(".rate .opt").forEach(x=>x.disabled=true);
+        const v=Number(b.dataset.v); b.classList.add(v>=0.5?"right":"wrong");
+        record(q,v);
+      });
+    };
+  } else {
+    card.innerHTML = `<p class="question">${q.q}</p><div class="opts">${q.order.map(k=>`<button class="opt" data-k="${k}">${q.o[k]}</button>`).join("")}</div><div id="fb"></div>`;
+    card.querySelectorAll(".opt").forEach(b=>b.onclick=()=>{
+      const k=Number(b.dataset.k), ok=k===q.c;
+      card.querySelectorAll(".opt").forEach(x=>{ x.disabled=true; if(Number(x.dataset.k)===q.c) x.classList.add("right"); });
+      if(!ok) b.classList.add("wrong");
+      $("#fb").innerHTML = `<div class="feedback"><div class="verdict ${ok?"ok":"no"}">${ok?"Correct.":"Not quite."}</div><p style="margin:0">${q.e}</p>
+        <p class="source">Source: ${q.src}</p>${localNote}</div>`;
+      record(q, ok?1:0);
+    });
+  }
+}
+function record(q,v){
+  state.results[state.i]={q,v};
+  addSeen(q.id);
+  renderProgress();
+  const btn=$("#nextBtn"); btn.classList.remove("hidden");
+  btn.textContent = state.i===state.quiz.length-1 ? "See results" : "Next question";
+  btn.focus();
+}
+$("#nextBtn").onclick=()=>{
+  state.i++;
+  if (state.i<state.quiz.length){ showQ(); window.scrollTo(0,0); } else finish();
+};
+
+function finish(){
+  show("results");
+  const total=state.results.reduce((s,r)=>s+r.v,0), n=state.results.length;
+  const pct=Math.round(total/n*100);
+  $("#scorePct").textContent=pct+"%";
+  $("#scoreText").textContent=`${total} out of ${n}`;
+  const subjName = state.subject==="any" ? "" : ` · ${$("#subject").selectedOptions[0].text}`;
+  $("#resultsIntro").textContent = `${ROLES[state.role].name} · ${YEAR_NAMES[state.year]}${subjName} · ${new Date().toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})}`;
+  $("#bankResult").innerHTML = bankHTML();
+  const rs=$("#bankResult #resetSeen"); if(rs) rs.remove();
+  const by={};
+  state.results.forEach(r=>{ by[r.q.a]=by[r.q.a]||{s:0,n:0}; by[r.q.a].s+=r.v; by[r.q.a].n++; });
+  $("#bars").innerHTML = Object.keys(by).map(a=>{
+    const p=Math.round(by[a].s/by[a].n*100);
+    return `<div class="bar-row"><span>${AREAS[a]}</span><div class="bar" role="img" aria-label="${p}%"><b style="width:${p}%"></b></div><span class="pct">${p}%</span></div>`;
+  }).join("");
+  const weak=state.results.filter(r=>r.v<1);
+  $("#reviewHead").textContent = weak.length ? "To review" : "Nothing to review – well done";
+  $("#review").innerHTML = weak.map(r=>`<li><div class="q">${r.q.q}</div>
+    ${r.q.t==="cv" ? `<div>Key points: ${r.q.k.join("; ")}.</div>` : `<div>Answer: ${r.q.o[r.q.c]}</div>`}
+    <div class="src">Reread: ${r.q.src}</div></li>`).join("");
+}
+
+/* ================= events ================= */
+$("#quitBtn").onclick=()=>{
+  if (!$("#quiz").classList.contains("hidden")){ $("#confirmQuit").classList.remove("hidden"); $("#cqYes").focus(); window.scrollTo(0,0); }
+  else goHome();
+};
+$("#cqYes").onclick=goHome;
+$("#cqNo").onclick=()=>$("#confirmQuit").classList.add("hidden");
+$("#againBtn").onclick=start;
+$("#homeBtn").onclick=goHome;
+$("#printBtn").onclick=()=>window.print();
+$("#tickAll").onclick=()=>{ relevantAreas().forEach(a=>state.areas.add(a)); renderAreas(); };
+$("#tickNone").onclick=()=>{ state.areas=new Set(["safe"]); renderAreas(); };
+document.querySelectorAll('input[name="year"]').forEach(r=>r.addEventListener("change",e=>{state.year=e.target.value; state.areas.clear(); renderAreas();}));
+$("#subject").addEventListener("change",e=>{state.subject=e.target.value; updateCount();});
+$("#startBtn").onclick=start;
+renderRoles(); renderAreas();
+</script>
+</body>
+</html>
