@@ -228,6 +228,14 @@ textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
       <div class="area-list" id="areas"></div>
     </fieldset>
 
+    <fieldset>
+      <legend><span class="step" id="modeStep">5</span>Type of quiz</legend>
+      <div class="role-grid" id="modes">
+        <div class="role"><input type="radio" name="mode" id="m-mix" value="mix" checked><label for="m-mix"><b>Mixed quiz</b><small>10 questions: 7 quick questions and 3 inspector conversations with longer answers</small></label></div>
+        <div class="role"><input type="radio" name="mode" id="m-cv" value="cv"><label for="m-cv"><b>Conversation practice</b><small>5 inspector conversations. Write or say a longer answer, then compare it with the key points</small></label></div>
+      </div>
+    </fieldset>
+
     <div class="bank" id="bank"></div>
 
     <div class="row">
@@ -297,7 +305,7 @@ const ROLES = {
 };
 const YEAR_NAMES = {all:"All years",R:"Reception",1:"Year 1",2:"Year 2"};
 const TYPE_NAMES = {mc:"Knowledge check",sc:"Scenario",cv:"Inspector conversation"};
-const QUIZ_LEN = 10;
+const QUIZ_LEN = 10, CV_LEN = 5;
 const ALL=["T","E","A","M"], TCH=["T","E"], CLS=["T","E","A"], LEAD=["LEAD"];
 const CHECK_SVG = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="var(--on-green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -782,6 +790,53 @@ const Q = [
  k:["Planned purposeful play linked to curriculum goals","Adults interacting to extend thinking and vocabulary","Balance of adult-led and child-initiated learning","Indoor and outdoor provision","How you check what children have learned"],
  src:"EYFS statutory framework; Ofsted report, September 2022"},
 
+/* ---------- MORE CONVERSATION PRACTICE (all staff) ---------- */
+{a:"safe",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “What would you do if you were worried about how another adult in school was behaving with children?”",
+ k:["Report it to the headteacher straight away","If it is about the headteacher, go to the chair of governors","Share low-level concerns too, even if you are unsure","Know that the local authority designated officer (LADO) may be involved","Know you can use the NSPCC whistleblowing line if concerns are not dealt with"],
+ src:"KCSIE, Part four; school Safeguarding and Child Protection Policy",loc:true},
+{a:"safe",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “What would you do if you noticed an injury on a child that you could not explain?”",
+ k:["Do not examine the child or ask leading questions","Note what you saw, where, and when, and anything the child said in their own words","Record it on CPOMS","Tell the DSL the same day","Do not contact the parents yourself unless the DSL asks you to"],
+ src:"KCSIE, Part one; school Safeguarding and Child Protection Policy",loc:true},
+{a:"safe",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “What safeguarding training have you had this year?”",
+ k:["Annual safeguarding training and reading KCSIE Part one","Prevent training","Online safety, including filtering and monitoring","Regular updates in weekly staff meetings","One thing the training changed in what you do"],
+ src:"School Development Plan 2025–26",loc:true},
+{a:"safe",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “How does the school deal with children hurting or being unkind to each other?”",
+ k:["It is never dismissed as banter or “just playing”","Staff step in, support the child affected, and record it","Concerns go to the DSL where there is a safeguarding worry","The Child-on-Child Abuse Policy sets out the approach","Pupils are taught about kindness, boundaries and telling a trusted adult"],
+ src:"School Child-on-Child Abuse Policy; KCSIE"},
+{a:"incl",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “How do you support a child with SEND during the day?”",
+ k:["Know the child’s needs and any agreed plan","Make the reasonable adjustments agreed, such as a quieter space or visual prompts","Use calm, clear language and give time to respond","Tell the class teacher or SENCO what you notice","Treat the child with the same high expectations as others"],
+ src:"School SEND Policy; Equality Act 2010",loc:true},
+{a:"att",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “How do you know what behaviour the school expects?”",
+ k:["The Positive Behaviour Policy","Proud Promises and the scripts displayed around school","Training at the start of the year","Using the same words and routines as other adults","Who you ask if you are unsure"],
+ src:"School Development Plan 2025–26"},
+{a:"att",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “What do you do if you see bullying, or a child tells you they are being bullied?”",
+ k:["Take it seriously and listen","Stop it and keep the child safe","Record what happened and who was involved","Pass it on to the class teacher or a senior leader","Follow up to check it has stopped"],
+ src:"Ofsted report, September 2022; school anti-bullying approach",loc:true},
+{a:"att",r:["M","A"],y:"all",s:"any",t:"cv",q:"The inspector asks: “Tell me about a time you helped two children sort out a falling-out.”",
+ k:["What happened, briefly","How you kept calm and used the school’s scripts","How you helped each child say what happened and how they felt","How the children put things right","Whether you passed it on to the teacher"],
+ src:"School Development Plan 2025–26 (Positive Behaviour Policy)"},
+{a:"att",r:["M"],y:"all",s:"any",t:"cv",q:"The inspector asks: “What happens at lunchtime if children do not follow the rules?”",
+ k:["Remind children of the expectation using the school’s scripts","Praise children who are getting it right","Follow the steps in the Positive Behaviour Policy","Record and pass on anything serious or repeated","Treat all children fairly and consistently"],
+ src:"School Development Plan 2025–26",loc:true},
+{a:"pd",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “What would you do if a child became seriously unwell or had an allergic reaction?”",
+ k:["Stay with the child and call for a first aider","Know which children have care plans and where their medication is kept","Use the adrenaline auto-injector if prescribed and needed","Call 999 in an emergency","Make sure the office and parents are informed and it is recorded"],
+ src:"DfE, Supporting pupils with medical conditions; school medical procedures",loc:true},
+{a:"pd",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “How do you help children who find playtime or lunchtime difficult?”",
+ k:["Notice children who are alone, anxious or often in conflict","Offer a friendly way to join in, or a quieter activity","Know about support such as ELSA","Tell the class teacher what you have noticed","Help keep lunchtimes calm and sociable"],
+ src:"School Development Plan 2025–26; Ofsted report, September 2022"},
+{a:"pd",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “What is it like for pupils at this school?”",
+ k:["A warm and caring school with an ethos of care and mutual respect","Children feel safe and know who to talk to","Kind behaviour and clear routines","Clubs, trips and enrichment weeks","Pupil voice through the School Council"],
+ src:"School aims; Ofsted report, September 2022"},
+{a:"curr",r:["A"],y:"all",s:"any",t:"cv",q:"The inspector asks a TA: “How do you help a pupil without doing the work for them?”",
+ k:["Prompt with questions rather than giving answers","Use resources and visual prompts","Give the pupil time to think","Step back when they can manage","Tell the teacher how independent the pupil was"],
+ src:"School Development Plan 2025–26 (use of support staff)"},
+{a:"incl",r:["A"],y:"all",s:"any",t:"cv",q:"The inspector asks a TA: “How do you know what your intervention group needs next?”",
+ k:["Short checks at the start and end of each session","Notes you share with the teacher","The six-weekly intervention review","Adjusting when a pupil is secure or stuck","Links to what the class is learning"],
+ src:"School Development Plan 2025–26"},
+{a:"incl",r:["A"],y:"all",s:"any",t:"cv",q:"The inspector asks: “How do you support pupils’ emotional wellbeing?”",
+ k:["ELSA sessions for children who need them","Zones of Regulation language","Calm, consistent relationships","Noticing changes and passing them on","Knowing when a concern is a safeguarding matter for the DSL"],
+ src:"School Development Plan 2025–26"},
+
 /* ---------- SUBJECT LEADERSHIP (all leaders) ---------- */
 {a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"What does the school expect subject leaders to monitor?",
  o:["Only planning","Policy, CPD, planning and work scrutiny, displays, pupil voice and assessment","Only test results","Nothing – SLT does this"],c:1,
@@ -939,7 +994,7 @@ function store(k,v){ try{ localStorage.setItem(k,JSON.stringify(v)); }catch(e){}
 function load(k,d){ try{ const v=localStorage.getItem(k); return v?JSON.parse(v):d; }catch(e){ return d; } }
 
 /* ================= state ================= */
-let state = {role:"T", year:"all", subject:"any", areas:new Set(), quiz:[], i:0, results:[]};
+let state = {role:"T", mode:"mix", year:"all", subject:"any", areas:new Set(), quiz:[], i:0, results:[]};
 const seenKey = () => "tg-seen-"+state.role;
 function getSeen(){ return new Set(load(seenKey(),[])); }
 function addSeen(id){ const s=getSeen(); s.add(id); store(seenKey(),[...s]); }
@@ -985,6 +1040,7 @@ function renderAreas(){
   });
   $("#subjectSet").classList.toggle("hidden", state.role==="M");
   $("#areaStep").textContent = state.role==="M" ? "3" : "4";
+  $("#modeStep").textContent = state.role==="M" ? "4" : "5";
   if (state.role==="M"){ state.subject="any"; $("#subject").value="any"; }
   updateCount();
 }
@@ -1003,8 +1059,8 @@ function bankHTML(){
     <div class="line" style="margin:.5rem 0 0"><span class="count">Enough for about ${quizzes} quizzes without repeats (${YEAR_NAMES[state.year].toLowerCase()}).</span>${n?'<button class="linkbtn" id="resetSeen">Start the set again</button>':''}</div>`;
 }
 function updateCount(){
-  const n=pool().length;
-  $("#poolCount").textContent = n ? `${n} questions match your choices` : "No questions match. Tick more areas.";
+  const all=pool(), n = state.mode==="cv" ? all.filter(q=>q.t==="cv").length : all.length;
+  $("#poolCount").textContent = n ? (state.mode==="cv" ? `${n} conversation questions match your choices` : `${n} questions match your choices, including ${all.filter(q=>q.t==="cv").length} conversations`) : "No questions match. Tick more areas.";
   $("#startBtn").disabled = n===0;
   $("#bank").innerHTML = bankHTML();
   const r=$("#resetSeen"); if(r) r.onclick=()=>{ store(seenKey(),[]); updateCount(); };
@@ -1021,13 +1077,28 @@ function take(list, n, used, seen){
 }
 function buildQuiz(){
   const p=pool(); let seen=getSeen();
-  if (p.every(q=>seen.has(q.id))){ store(seenKey(),[]); seen=new Set(); }
   const used=new Set(), picked=[];
+  const isCv=q=>q.t==="cv", notCv=q=>q.t!=="cv";
+  const leader=state.areas.has("lead");
+  if (state.mode==="cv"){
+    const cp=p.filter(isCv);
+    if (cp.every(q=>seen.has(q.id))){ seen=new Set([...seen].filter(id=>!cp.some(q=>q.id===id))); store(seenKey(),[...seen]); }
+    picked.push(...take(cp.filter(q=>q.a==="safe"),1,used,seen));
+    if (leader) picked.push(...take(cp.filter(q=>q.a==="lead"),1,used,seen));
+    if (state.subject!=="any") picked.push(...take(cp.filter(q=>q.s===state.subject),1,used,seen));
+    picked.push(...take(cp, CV_LEN-picked.length, used, seen));
+    return shuffle(picked.slice(0,CV_LEN)).map(q=>({...q}));
+  }
+  if (p.every(q=>seen.has(q.id))){ store(seenKey(),[]); seen=new Set(); }
   const onlySafe = state.areas.size===1;
-  picked.push(...take(p.filter(q=>q.a==="safe"), onlySafe?QUIZ_LEN:3, used, seen));
-  if (state.areas.has("lead")) picked.push(...take(p.filter(q=>q.a==="lead"),3,used,seen));
-  if (state.subject!=="any") picked.push(...take(p.filter(q=>q.s===state.subject),3,used,seen));
-  picked.push(...take(p, QUIZ_LEN-picked.length, used, seen));
+  // three inspector conversations in every mixed quiz
+  const cvs = take(p.filter(isCv), 3, used, seen); picked.push(...cvs);
+  const safeHave = cvs.filter(q=>q.a==="safe").length;
+  picked.push(...take(p.filter(q=>q.a==="safe" && notCv(q)), onlySafe ? QUIZ_LEN-picked.length : Math.max(0,3-safeHave), used, seen));
+  if (leader) picked.push(...take(p.filter(q=>q.a==="lead" && notCv(q)),2,used,seen));
+  if (state.subject!=="any") picked.push(...take(p.filter(q=>q.s===state.subject && notCv(q)),2,used,seen));
+  picked.push(...take(p.filter(notCv), QUIZ_LEN-picked.length, used, seen));
+  if (picked.length<QUIZ_LEN) picked.push(...take(p, QUIZ_LEN-picked.length, used, seen));
   return shuffle(picked.slice(0,QUIZ_LEN)).map(q=>{
     if (q.o){ const order=shuffle(q.o.map((_,k)=>k)); return {...q, order}; }
     return {...q};
@@ -1144,6 +1215,7 @@ $("#tickAll").onclick=()=>{ relevantAreas().forEach(a=>state.areas.add(a)); rend
 $("#tickNone").onclick=()=>{ state.areas=new Set(["safe"]); renderAreas(); };
 document.querySelectorAll('input[name="year"]').forEach(r=>r.addEventListener("change",e=>{state.year=e.target.value; state.areas.clear(); renderAreas();}));
 $("#subject").addEventListener("change",e=>{state.subject=e.target.value; updateCount();});
+document.querySelectorAll('input[name="mode"]').forEach(r=>r.addEventListener("change",e=>{state.mode=e.target.value; updateCount();}));
 $("#startBtn").onclick=start;
 renderRoles(); renderAreas();
 </script>
