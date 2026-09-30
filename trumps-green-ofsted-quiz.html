@@ -182,7 +182,7 @@ textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
   <!-- SETUP -->
   <section id="setup">
     <h1>Inspection readiness quiz</h1>
-    <p class="lede">Practise for inspection in about ten minutes. Choose your role, year group, subject and the areas you want to practise. Each quiz gives you questions you have not seen before, until you have worked through the whole set.</p>
+    <p class="lede">Practise for inspection in about 25 minutes. Choose your role, year group, subject and the areas you want to practise. Each quiz gives you questions you have not seen before, until you have worked through the whole set.</p>
 
     <fieldset>
       <legend><span class="step">1</span>Your role</legend>
@@ -231,7 +231,7 @@ textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
     <fieldset>
       <legend><span class="step" id="modeStep">5</span>Type of quiz</legend>
       <div class="role-grid" id="modes">
-        <div class="role"><input type="radio" name="mode" id="m-mix" value="mix" checked><label for="m-mix"><b>Mixed quiz</b><small>10 questions: 7 quick questions and 3 inspector conversations with longer answers</small></label></div>
+        <div class="role"><input type="radio" name="mode" id="m-mix" value="mix" checked><label for="m-mix"><b>Mixed quiz</b><small>18 questions: 13 quick questions and 5 inspector conversations with longer answers</small></label></div>
         <div class="role"><input type="radio" name="mode" id="m-cv" value="cv"><label for="m-cv"><b>Conversation practice</b><small>5 inspector conversations. Write or say a longer answer, then compare it with the key points</small></label></div>
       </div>
     </fieldset>
@@ -289,7 +289,7 @@ const AREAS = {
   att:"Attendance and behaviour",
   pd:"Personal development and wellbeing",
   ey:"Early years",
-  lead:"Subject leadership"
+  lead:"Leadership and governance"
 };
 /* tags: which question tags each role receives */
 const ROLES = {
@@ -297,16 +297,18 @@ const ROLES = {
   E:{name:"ECT",desc:"Early career teachers in induction",group:"staff",tags:["E"],areas:["safe","incl","curr","ach","att","pd","ey"]},
   A:{name:"Teaching assistant",desc:"TAs, ELSA and intervention staff",group:"staff",tags:["A"],areas:["safe","incl","curr","att","pd","ey"]},
   M:{name:"Midday staff",desc:"Lunchtime supervisors",group:"staff",tags:["M"],areas:["safe","incl","att","pd"]},
-  P:{name:"PSHE lead",desc:"Leads PSHE, RSHE and Jigsaw",group:"lead",tags:["T","LEAD","P"],subject:"pshe",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
-  L:{name:"English and phonics lead",desc:"Leads reading, phonics and writing",group:"lead",tags:["T","LEAD","L"],subject:"reading",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
-  N:{name:"Maths lead",desc:"Leads mathematics",group:"lead",tags:["T","LEAD","N"],subject:"maths",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
-  Y:{name:"EYFS lead",desc:"Leads Reception",group:"lead",tags:["T","LEAD","Y"],year:"R",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
-  S:{name:"Other subject leader",desc:"Science, humanities, RE, arts, PE or computing",group:"lead",tags:["T","LEAD","S"],areas:["lead","safe","incl","curr","ach","att","pd","ey"]}
+  P:{name:"PSHE lead",desc:"Leads PSHE, RSHE and Jigsaw",group:"lead",tags:["T","LEAD","SUBJ","P"],subject:"pshe",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
+  L:{name:"English and phonics lead",desc:"Leads reading, phonics and writing",group:"lead",tags:["T","LEAD","SUBJ","L"],subject:"reading",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
+  N:{name:"Maths lead",desc:"Leads mathematics",group:"lead",tags:["T","LEAD","SUBJ","N"],subject:"maths",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
+  Y:{name:"EYFS lead",desc:"Leads Reception",group:"lead",tags:["T","LEAD","SUBJ","Y"],year:"R",areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
+  S:{name:"Other subject leader",desc:"Science, humanities, RE, arts, PE or computing",group:"lead",tags:["T","LEAD","SUBJ","S"],areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
+  C:{name:"SENCO",desc:"SEND co-ordinator and SENCO support",group:"lead",tags:["T","LEAD","C"],areas:["lead","safe","incl","curr","ach","att","pd","ey"]},
+  H:{name:"Senior leadership team",desc:"Headteacher, deputy and senior leaders",group:"lead",tags:["T","LEAD","H"],areas:["lead","safe","incl","curr","ach","att","pd","ey"]}
 };
 const YEAR_NAMES = {all:"All years",R:"Reception",1:"Year 1",2:"Year 2"};
 const TYPE_NAMES = {mc:"Knowledge check",sc:"Scenario",cv:"Inspector conversation"};
-const QUIZ_LEN = 10, CV_LEN = 5;
-const ALL=["T","E","A","M"], TCH=["T","E"], CLS=["T","E","A"], LEAD=["LEAD"];
+const QUIZ_LEN = 18, CV_LEN = 5;
+const ALL=["T","E","A","M"], TCH=["T","E"], CLS=["T","E","A"], LEAD=["LEAD"], SUBJ=["SUBJ"];
 const CHECK_SVG = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3.2 3L13 4.5" fill="none" stroke="var(--on-green)" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
 /* ================= question bank =================
@@ -405,7 +407,7 @@ const Q = [
 {a:"safe",r:ALL,y:"all",s:"any",t:"cv",q:"The inspector asks: “What signs might make you worried about a child?”",
  k:["Changes in behaviour, mood or appearance","Unexplained injuries or explanations that do not fit","Signs of neglect such as hunger, poor hygiene or unsuitable clothing","Frequent absence or lateness","What the child says or plays out; knowing that SEND can mask signs"],
  src:"KCSIE, Part one"},
-{a:"safe",r:["LEAD"],y:"all",s:"any",t:"cv",q:"The inspector asks a leader: “How does safeguarding link to your subject?”",
+{a:"safe",r:SUBJ,y:"all",s:"any",t:"cv",q:"The inspector asks a leader: “How does safeguarding link to your subject?”",
  k:["Content that teaches pupils to keep safe, for example online safety or trusted adults","Safe practice in lessons such as trips, PE or DT tools","How teaching supports the school’s safeguarding curriculum","How staff know what to do if a lesson prompts a disclosure"],
  src:"School safeguarding curriculum; KCSIE"},
 
@@ -473,7 +475,7 @@ const Q = [
 {a:"incl",r:TCH,y:["R","1"],s:"any",t:"sc",q:"You notice a child rarely speaks in class and struggles to follow two-step instructions. What should you do first?",
  o:["Wait to see if it improves by Year 2","Record your observations, adapt your teaching, talk to parents and raise it with the SENCO for early identification","Refer them directly to a speech therapist","Move them to a quieter class"],c:1,
  e:"Early identification is a school priority. The SENCO can advise on next steps and external support.",src:"School Development Plan 2025–26 (early intervention)"},
-{a:"incl",r:["LEAD"],y:"all",s:"any",t:"cv",q:"The inspector asks a subject leader: “How well do pupils with SEND and disadvantaged pupils learn in your subject?”",
+{a:"incl",r:SUBJ,y:"all",s:"any",t:"cv",q:"The inspector asks a subject leader: “How well do pupils with SEND and disadvantaged pupils learn in your subject?”",
  k:["What you know from monitoring their work and talking to them","How the curriculum is adapted without lowering ambition","Training you have given staff on adapting your subject","Evidence of progress compared with other pupils","What you are doing where gaps remain"],
  src:"Ofsted report, September 2022; School Development Plan 2025–26"},
 
@@ -837,35 +839,155 @@ const Q = [
  k:["ELSA sessions for children who need them","Zones of Regulation language","Calm, consistent relationships","Noticing changes and passing them on","Knowing when a concern is a safeguarding matter for the DSL"],
  src:"School Development Plan 2025–26"},
 
+/* ---------- ALL LEADERS ---------- */
+{a:"lead",r:LEAD,y:"all",s:"any",t:"cv",q:"The inspector asks a leader: “How does your work link to the School Development Plan?”",
+ k:["The SDP priority your work supports","The actions you are responsible for","How you check progress against success criteria","What has changed as a result","What you will do next"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"What is the leadership evaluation area called in the renewed inspection framework?",
+ o:["Leadership and governance","Leadership and management","Effectiveness of leaders","School improvement"],c:0,
+ e:"It considers how leaders, including governors, improve the school and support staff.",src:"Ofsted school inspection toolkit (renewed framework)"},
+
+/* ---------- SENCO ---------- */
+{a:"lead",r:["C"],y:"all",s:"any",t:"mc",q:"Since September 2024, which qualification must a newly appointed SENCO achieve within three years?",
+ o:["The National Professional Qualification (NPQ) for SENCOs","A master’s degree in SEN","The National Award for SEN Co-ordination only","No qualification is required"],c:0,
+ e:"The NPQ for SENCOs replaced the National Award for new appointments from September 2024. The SDP notes the deputy headteacher is working towards a SENCO qualification.",src:"DfE SENCO qualification requirements; School Development Plan 2025–26"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"mc",q:"Who must the SENCO be?",
+ o:["A qualified teacher working at the school","Any member of support staff","A local authority officer","A governor"],c:0,
+ e:"The SEND Code of Practice requires the SENCO to be a qualified teacher working at the school.",src:"SEND Code of Practice 0–25 (2015)"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"mc",q:"How often must the SEN information report be updated and published?",
+ o:["At least once a year, on the school website","Every three years","Only when Ofsted asks","It does not need to be published"],c:0,
+ e:"The school publishes a SEND information report for 2026–27 on its SEND page.",src:"SEND Code of Practice; school SEND page"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"mc",q:"Who is responsible for the progress of pupils with SEND in class?",
+ o:["The class teacher, including where pupils are supported by TAs","The SENCO alone","The teaching assistant","The parents"],c:0,
+ e:"The SEND Code of Practice states that teachers are responsible and accountable for the progress of all pupils in their class.",src:"SEND Code of Practice 0–25 (2015)"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"mc",q:"Which of these is not, by itself, a special educational need?",
+ o:["Having English as an additional language","A significant difficulty with communication","A physical disability that affects access to learning","Difficulties with learning much greater than most children of the same age"],c:0,
+ e:"Identifying and assessing SEN for children with EAL needs care, so that language needs are not mistaken for SEN.",src:"SEND Code of Practice 0–25 (2015)"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"mc",q:"What is the maximum time from a request for an EHC needs assessment to the final EHCP being issued?",
+ o:["20 weeks","6 weeks","12 months","2 years"],c:0,
+ e:"The overall statutory time limit is 20 weeks, with exceptions only in limited cases.",src:"SEND Code of Practice 0–25 (2015)"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"mc",q:"Which evidence best supports a request for an EHC needs assessment?",
+ o:["Records of several assess, plan, do, review cycles showing the provision given and its impact, with professional advice","A parent’s letter alone","One low test score","A teacher’s opinion without records"],c:0,
+ e:"The local authority looks for evidence that the school has taken relevant and purposeful action over time.",src:"SEND Code of Practice 0–25 (2015)"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"mc",q:"What is the local offer?",
+ o:["The local authority’s published information about SEND services and support available locally","The school’s SEN budget","A list of pupils on the SEN register","A special school admissions list"],c:0,
+ e:"The SEN information report should link to Surrey’s local offer.",src:"Children and Families Act 2014; SEND Code of Practice"},
+{a:"lead",r:["C","H"],y:"all",s:"any",t:"mc",q:"What period must a school accessibility plan cover?",
+ o:["Three years, with regular review","One term","Ten years","It has no set period"],c:0,
+ e:"The plan shows how the school will increase access to the curriculum, the building and information for disabled pupils.",src:"Equality Act 2010; school Accessibility Plan"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"cv",q:"The inspector asks the SENCO: “How do you identify pupils with SEND early?”",
+ k:["Teacher concerns and assessment information","Surrey OAP guidance to RAG rate provision and identify barriers","Early language screening and NELI in Reception","Working with parents and outside professionals","Termly pupil progress meetings"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"cv",q:"The inspector asks the SENCO: “How do you know SEN support is working?”",
+ k:["Clear, measurable targets in support plans","Regular review with teachers, parents and pupils","Six-weekly intervention reviews","Pupil progress data compared with starting points","Case studies showing impact"],
+ src:"School Development Plan 2025–26; SEND Code of Practice"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"cv",q:"The inspector asks the SENCO: “How have you helped teachers adapt the curriculum for pupils with SEND?”",
+ k:["Link to the 2022 area for improvement","Termly SEND CPD for staff","Sharing OAP strategies","Checking adaptation in lessons and books","Coaching and follow-up for individual staff"],
+ src:"Ofsted report, September 2022; School Development Plan 2025–26"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"cv",q:"The inspector asks the SENCO: “How do you deploy teaching assistants, and how do you know it works?”",
+ k:["Deployment based on pupil need","Clear roles in lessons and interventions","Training for TAs","Feedback between TAs and teachers","Checking impact through reviews and observation"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"cv",q:"The inspector asks the SENCO: “How do you work with parents of pupils with SEND?”",
+ k:["Informing parents when a child is added to or removed from the register","Involving parents in setting and reviewing targets","Regular meetings and easy contact through the office","The SEND information report and local offer","Acting on parents’ views"],
+ src:"School SEND page; SEND Code of Practice"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"cv",q:"The inspector asks the SENCO: “Tell me about a pupil with SEND whose support you are most concerned about.”",
+ k:["The pupil’s needs, without naming them unnecessarily","What has been tried and the impact","Outside agencies involved","What happens next and when","How parents are involved"],
+ src:"School Development Plan 2025–26 (case studies)"},
+{a:"lead",r:["C"],y:["2"],s:"any",t:"cv",q:"The inspector asks the SENCO: “How do you prepare pupils with SEND for moving to junior school?”",
+ k:["Early transition meetings with the junior school SENCO","Sharing support plans and strategies","Extra visits and social stories","Involving parents","Planning for EHCP pupils through the annual review"],
+ src:"SEND Code of Practice",loc:true},
+{a:"lead",r:["C"],y:"all",s:"any",t:"sc",q:"A teacher tells you a pupil with SEND is not making progress despite interventions. What is the best next step?",
+ o:["Review the plan with the teacher and parents, check what the evidence shows, and consider specialist advice","Stop all support","Wait until the end of the year","Move the pupil to a different class"],c:0,
+ e:"The graduated approach means changing provision when it is not working, and seeking specialist advice where needed.",src:"SEND Code of Practice 0–25 (2015)"},
+{a:"lead",r:["C"],y:"all",s:"any",t:"mc",q:"What does the SDP ask of the Inclusion Handbook and SEND processes?",
+ o:["That staff know them and apply OAP strategies consistently","That only the SENCO reads them","That they are reviewed every ten years","That they are kept confidential from staff"],c:0,
+ e:"The school publishes an Inclusion Handbook for 2026–27. Staff should know how to use it.",src:"School SEND page; School Development Plan 2025–26",loc:true},
+
+/* ---------- SENIOR LEADERSHIP TEAM ---------- */
+{a:"lead",r:["H"],y:"all",s:"any",t:"mc",q:"Who should the designated safeguarding lead be?",
+ o:["A senior member of staff from the school leadership team","Any teacher who volunteers","A governor","The office manager"],c:0,
+ e:"KCSIE states the DSL should be an appropriate senior member of staff from the leadership team.",src:"KCSIE, Part two"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"mc",q:"How often should the school review its filtering and monitoring provision?",
+ o:["At least once a year","Every five years","Only after an incident","Never – the provider does this"],c:0,
+ e:"The DfE filtering and monitoring standards expect at least an annual review.",src:"DfE filtering and monitoring standards; KCSIE"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"mc",q:"What does KCSIE require of interview panels for new staff?",
+ o:["At least one panel member has safer recruitment training","All panel members are governors","The panel includes a parent","No specific requirement"],c:0,
+ e:"Safer recruitment training helps panels spot warning signs during recruitment.",src:"KCSIE, Part three"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"mc",q:"What is the single central record?",
+ o:["A record of the pre-appointment checks carried out on staff and others who work at the school","A list of pupils on the SEN register","The staff training timetable","The pupil attendance register"],c:0,
+ e:"Inspectors check the single central record as part of safeguarding.",src:"KCSIE, Part three"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"mc",q:"When must all staff receive safeguarding training?",
+ o:["At induction, with regular updates and refresher training","Only when they reach senior roles","Every five years","Only if they work in Reception"],c:0,
+ e:"Staff should receive training at induction, regular updates, and refresher training. The school also shares updates in weekly staff meetings.",src:"KCSIE, Part two; School Development Plan 2025–26"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"mc",q:"What must the school publish about pupil premium?",
+ o:["A pupil premium strategy statement on the website, using the DfE template","Nothing","Only the total amount received","A list of eligible pupils"],c:0,
+ e:"The statement sets out how funding is spent and its impact on disadvantaged pupils.",src:"DfE pupil premium conditions of grant"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"mc",q:"What must the school publish about the PE and sport premium?",
+ o:["How the funding is spent and its impact","Nothing","Only the amount received","Only competition results"],c:0,
+ e:"The SDP links the funding to Activemark and the development of physical skills.",src:"DfE PE and sport premium guidance; School Development Plan 2025–26"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"mc",q:"What does the attendance guidance expect of senior leadership?",
+ o:["A senior leader with overall responsibility for championing and improving attendance","Nothing – attendance is for the office","A governor to take registers","Parents to report attendance data"],c:0,
+ e:"The SDP includes half-termly meetings with the Surrey attendance officer and a 96% target.",src:"DfE, Working together to improve school attendance; School Development Plan 2025–26"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"mc",q:"How often must a school publish its equality objectives?",
+ o:["At least every four years","Every year","Every ten years","Never"],c:0,
+ e:"This is part of the public sector equality duty under the Equality Act 2010.",src:"Equality Act 2010 (specific duties)"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"mc",q:"What are the core functions of the governing body?",
+ o:["Setting strategic direction, holding leaders to account for educational performance and staff performance, and overseeing finances","Running the school day to day","Teaching lessons","Writing all policies"],c:0,
+ e:"Governors challenge and support leaders. The SDP names a link governor for each priority.",src:"DfE governance guidance; School Development Plan 2025–26"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"cv",q:"The inspector asks the headteacher: “How have you addressed the area for improvement from 2022?”",
+ k:["The area: staff subject knowledge to adapt the curriculum, particularly for SEND","Training and CPD delivered","How subject leaders and the SENCO check adaptation","Evidence of impact in lessons, books and outcomes","What still needs to improve"],
+ src:"Ofsted report, September 2022; School Development Plan 2025–26"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"cv",q:"The inspector asks senior leaders: “How do you know safeguarding is effective?”",
+ k:["Single central record checks","Staff training records and knowledge checks","Analysis of CPOMS records and patterns","The annual safeguarding audit and governor oversight","Pupils’ and parents’ views on safety"],
+ src:"KCSIE; School Development Plan 2025–26",loc:true},
+{a:"lead",r:["H"],y:"all",s:"any",t:"cv",q:"The inspector asks senior leaders: “How do you check the quality of teaching?”",
+ k:["Learning walks, drop-ins and lesson observations","Book looks and pupil voice","Subject leader monitoring reports","Coaching and follow-up","How you use findings to plan CPD"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"cv",q:"The inspector asks senior leaders: “How do you support staff workload and wellbeing?”",
+ k:["Shared planning and schemes","Clear, proportionate policies","Protected time for leaders and ECTs","Consulting staff before changes","How you know staff feel supported"],
+ src:"Ofsted school inspection toolkit",loc:true},
+{a:"lead",r:["H"],y:"all",s:"any",t:"cv",q:"The inspector asks senior leaders: “How do you make sure disadvantaged pupils and pupils with SEND achieve well?”",
+ k:["Pupil premium strategy and its impact","Termly pupil progress meetings focused on vulnerable groups","Adapting the curriculum without lowering ambition","Access to enrichment and clubs","Attendance support for these pupils"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"cv",q:"The inspector asks the chair of governors and headteacher: “How do governors hold leaders to account?”",
+ k:["A link governor for each SDP priority","Governor visits and reports","Challenging questions in meetings, with examples","Monitoring of safeguarding and the single central record","Governor training on the renewed framework"],
+ src:"School Development Plan 2025–26"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"cv",q:"The inspector asks senior leaders: “What is your evaluation of the school against the report card areas?”",
+ k:["A clear view for each evaluation area","The evidence behind each view","Strengths you are confident about","Areas that need attention and what you are doing","How this links to the SDP"],
+ src:"Ofsted school inspection toolkit; School Development Plan 2025–26"},
+{a:"lead",r:["H"],y:"all",s:"any",t:"cv",q:"The inspector asks senior leaders: “How do you improve attendance?”",
+ k:["Target of 96% and reduced persistent absence","Early headteacher letters before formal stages","Half-termly meetings with the Surrey attendance officer","Support for families, not just sanctions","Linking attendance with safeguarding"],
+ src:"School Development Plan 2025–26"},
+
 /* ---------- SUBJECT LEADERSHIP (all leaders) ---------- */
-{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"What does the school expect subject leaders to monitor?",
+{a:"lead",r:SUBJ,y:"all",s:"any",t:"mc",q:"What does the school expect subject leaders to monitor?",
  o:["Only planning","Policy, CPD, planning and work scrutiny, displays, pupil voice and assessment","Only test results","Nothing – SLT does this"],c:1,
  e:"Subject leaders monitor half-termly and complete a termly monitoring form.",src:"School Development Plan 2025–26",loc:true},
-{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"Who does a subject leader meet to review their subject?",
+{a:"lead",r:SUBJ,y:"all",s:"any",t:"mc",q:"Who does a subject leader meet to review their subject?",
  o:["The subject governor","The local authority adviser only","Parents","Nobody"],c:0,
  e:"Subject leaders meet their subject governor and produce a yearly report for governors.",src:"School Development Plan 2025–26",loc:true},
-{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"How often is a staff meeting devoted to subject leadership?",
+{a:"lead",r:SUBJ,y:"all",s:"any",t:"mc",q:"How often is a staff meeting devoted to subject leadership?",
  o:["Once a year","Once every half term","Every week","Never"],c:1,
  e:"The SDP plans one staff meeting every half term for subject leadership, with an agenda completed by every subject leader.",src:"School Development Plan 2025–26",loc:true},
-{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"What should the yearly subject report to governors cover?",
+{a:"lead",r:SUBJ,y:"all",s:"any",t:"mc",q:"What should the yearly subject report to governors cover?",
  o:["Coverage, skills, resourcing and training","Only test results","Only the budget","Staff absence"],c:0,
  e:"A standard proforma is used so governors can compare subjects.",src:"School Development Plan 2025–26",loc:true},
-{a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"Which is the strongest evidence that your subject curriculum is working?",
+{a:"lead",r:SUBJ,y:"all",s:"any",t:"mc",q:"Which is the strongest evidence that your subject curriculum is working?",
  o:["All units have been covered","Pupils can talk about and show what they know and remember, and their work shows progress","Displays look attractive","Planning is complete"],c:1,
  e:"Inspectors focus on what pupils know and remember, not only on coverage.",src:"Ofsted school inspection toolkit"},
-{a:"lead",r:LEAD,y:"all",s:"any",t:"sc",q:"Monitoring shows one class is not following the planned sequence in your subject. What do you do?",
+{a:"lead",r:SUBJ,y:"all",s:"any",t:"sc",q:"Monitoring shows one class is not following the planned sequence in your subject. What do you do?",
  o:["Report the teacher to the headteacher straight away","Talk with the teacher to understand why, agree support or CPD, and check again later","Ignore it – teachers know best","Rewrite the curriculum"],c:1,
  e:"Support first, then follow up. Keep a record of actions and impact.",src:"School Development Plan 2025–26 (subject leader accountability)"},
-{a:"lead",r:LEAD,y:"all",s:"any",t:"cv",q:"The inspector asks: “What are the strengths and weaknesses in your subject, and what are you doing about them?”",
+{a:"lead",r:SUBJ,y:"all",s:"any",t:"cv",q:"The inspector asks: “What are the strengths and weaknesses in your subject, and what are you doing about them?”",
  k:["A specific strength with evidence","A specific weakness with evidence","The actions you have taken and when","The impact so far","What happens next"],
  src:"Ofsted school inspection toolkit"},
-{a:"lead",r:LEAD,y:"all",s:"any",t:"cv",q:"The inspector asks: “How do you know your subject is taught well in every class, including the mixed-age classes?”",
+{a:"lead",r:SUBJ,y:"all",s:"any",t:"cv",q:"The inspector asks: “How do you know your subject is taught well in every class, including the mixed-age classes?”",
  k:["Monitoring activities: book looks, drop-ins, pupil voice","Checking the Year A / Year B planning for progression","Talking with teachers about their subject knowledge","Comparing outcomes across classes","Following up where there are differences"],
  src:"School Development Plan 2025–26"},
-{a:"lead",r:LEAD,y:"all",s:"any",t:"cv",q:"The inspector asks: “How have you developed staff subject knowledge?”",
+{a:"lead",r:SUBJ,y:"all",s:"any",t:"cv",q:"The inspector asks: “How have you developed staff subject knowledge?”",
  k:["Link to the 2022 area for improvement","Training you have led or arranged","How you identified the training needs","How practice has changed as a result","How you support new staff and ECTs"],
  src:"Ofsted report, September 2022; School Development Plan 2025–26"},
-{a:"lead",r:LEAD,y:"all",s:"any",t:"cv",q:"The inspector asks: “Why is your curriculum sequenced in this order?”",
+{a:"lead",r:SUBJ,y:"all",s:"any",t:"cv",q:"The inspector asks: “Why is your curriculum sequenced in this order?”",
  k:["What pupils need to know first","How knowledge builds from Reception to Year 2","Key vocabulary and concepts that recur","How the two-year rolling cycle keeps progression","What pupils need for junior school"],
  src:"School Development Plan 2025–26"},
 {a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"Where do the School Development Plan priorities come from?",
@@ -874,7 +996,7 @@ const Q = [
 {a:"lead",r:LEAD,y:"all",s:"any",t:"mc",q:"What did the School Development Plan ask staff and governors to do to prepare for the renewed framework?",
  o:["Read the inspection framework and school inspection toolkit, with CPD on each evaluation area","Nothing","Only read the previous report","Write new policies"],c:0,
  e:"The headteacher also planned to prepare a report on the new report card.",src:"School Development Plan 2025–26"},
-{a:"lead",r:LEAD,y:"all",s:"any",t:"cv",q:"The inspector asks: “What do pupils say about your subject?”",
+{a:"lead",r:SUBJ,y:"all",s:"any",t:"cv",q:"The inspector asks: “What do pupils say about your subject?”",
  k:["What pupil voice monitoring shows","What pupils enjoy and what they find hard","Whether pupils can recall key knowledge","What you changed as a result of pupil views"],
  src:"School Development Plan 2025–26 (pupil voice)"},
 
@@ -1067,10 +1189,11 @@ function updateCount(){
 }
 
 /* ================= quiz building (random, unseen first) ================= */
-function take(list, n, used, seen){
+function take(list, n, used, seen, allowSeen){
+  if (n<=0) return [];
   const avail = list.filter(q=>!used.has(q.id));
   const fresh = shuffle(avail.filter(q=>!seen.has(q.id)));
-  const old = shuffle(avail.filter(q=>seen.has(q.id)));
+  const old = allowSeen ? shuffle(avail.filter(q=>seen.has(q.id))) : [];
   const out = fresh.concat(old).slice(0,n);
   out.forEach(q=>used.add(q.id));
   return out;
@@ -1086,19 +1209,20 @@ function buildQuiz(){
     picked.push(...take(cp.filter(q=>q.a==="safe"),1,used,seen));
     if (leader) picked.push(...take(cp.filter(q=>q.a==="lead"),1,used,seen));
     if (state.subject!=="any") picked.push(...take(cp.filter(q=>q.s===state.subject),1,used,seen));
-    picked.push(...take(cp, CV_LEN-picked.length, used, seen));
+    picked.push(...take(cp, CV_LEN-picked.length, used, seen, true));
     return shuffle(picked.slice(0,CV_LEN)).map(q=>({...q}));
   }
   if (p.every(q=>seen.has(q.id))){ store(seenKey(),[]); seen=new Set(); }
   const onlySafe = state.areas.size===1;
-  // three inspector conversations in every mixed quiz
-  const cvs = take(p.filter(isCv), 3, used, seen); picked.push(...cvs);
+  // five inspector conversations in every mixed quiz
+  const cvs = take(p.filter(isCv), 5, used, seen); picked.push(...cvs);
   const safeHave = cvs.filter(q=>q.a==="safe").length;
-  picked.push(...take(p.filter(q=>q.a==="safe" && notCv(q)), onlySafe ? QUIZ_LEN-picked.length : Math.max(0,3-safeHave), used, seen));
-  if (leader) picked.push(...take(p.filter(q=>q.a==="lead" && notCv(q)),2,used,seen));
-  if (state.subject!=="any") picked.push(...take(p.filter(q=>q.s===state.subject && notCv(q)),2,used,seen));
+  picked.push(...take(p.filter(q=>q.a==="safe" && notCv(q)), onlySafe ? QUIZ_LEN-picked.length : Math.max(0,4-safeHave), used, seen));
+  if (leader) picked.push(...take(p.filter(q=>q.a==="lead" && notCv(q)),3,used,seen));
+  if (state.subject!=="any") picked.push(...take(p.filter(q=>q.s===state.subject && notCv(q)),3,used,seen));
   picked.push(...take(p.filter(notCv), QUIZ_LEN-picked.length, used, seen));
-  if (picked.length<QUIZ_LEN) picked.push(...take(p, QUIZ_LEN-picked.length, used, seen));
+  picked.push(...take(p, QUIZ_LEN-picked.length, used, seen));
+  picked.push(...take(p, QUIZ_LEN-picked.length, used, seen, true));
   return shuffle(picked.slice(0,QUIZ_LEN)).map(q=>{
     if (q.o){ const order=shuffle(q.o.map((_,k)=>k)); return {...q, order}; }
     return {...q};
